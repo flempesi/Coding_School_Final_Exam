@@ -56,6 +56,7 @@
     <Compile Include="Base\Person.cs" />
     <Compile Include="Impl\Course.cs" />
     <Compile Include="Impl\Enum.cs" />
+    <Compile Include="Impl\Professor.cs" />
     <Compile Include="Impl\Student.cs" />
     <Compile Include="WUI\Form1.cs">
       <SubType>Form</SubType>

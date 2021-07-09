@@ -103,18 +103,18 @@ namespace WindowsFormsApp1.Impl {
     //    public List<CoursesCategoryEnum> CAN_LEARN { get; set; }
     //}
 
-    public class Professor {
-        public Guid ID { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public short Age { get; set; }
-        public string Rank { get; set; }
-        public List<CoursesCategoryEnum> CAN_TEACH { get; set; }
+    //public class Professor {
+    //   // public Guid ID { get; set; }
+    //    //public string Name { get; set; }
+    //    //public string Surname { get; set; }
+    //    //public short Age { get; set; }
+    //    public string Rank { get; set; }
+    //    public List<CoursesCategoryEnum> CAN_TEACH { get; set; }
 
-        public Professor() {
-            ID = Guid.NewGuid();
-        }
-    }
+    //    public Professor() {
+    //        //ID = Guid.NewGuid();
+    //    }
+    //}
 
     //public class Course  {
     //    //public string id { get; set; }
