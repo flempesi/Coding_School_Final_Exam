@@ -10,13 +10,13 @@ using WindowsFormsApp1.Storages;
 
 namespace WindowsFormsApp1.WUI {
 
-    public partial class CourseSchedulerForm : Form {
+    public partial class CourseSchedulerOldForm : Form {
 
         public University NewUniversity = new University();
         private Storage _Storage = new Storage();
         
 
-        public CourseSchedulerForm() {
+        public CourseSchedulerOldForm() {
             InitializeComponent();
         }
         private void CourseSchedulerForm_Load(object sender, EventArgs e) {

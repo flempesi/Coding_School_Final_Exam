@@ -1,6 +1,6 @@
 ﻿
 namespace WindowsFormsApp1.WUI {
-    partial class CourseSchedulerForm {
+    partial class CourseSchedulerOldForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
