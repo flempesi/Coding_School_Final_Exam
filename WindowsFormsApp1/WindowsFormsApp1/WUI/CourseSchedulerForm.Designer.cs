@@ -1,6 +1,6 @@
 ﻿
 namespace WindowsFormsApp1.WUI {
-    partial class DataForm1 {
+    partial class CourseSchedulerForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -30,7 +30,6 @@ namespace WindowsFormsApp1.WUI {
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.ctrlExit = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -44,6 +43,8 @@ namespace WindowsFormsApp1.WUI {
             this.loadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ctrlDate = new System.Windows.Forms.DateTimePicker();
+            this.ctrlTime = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,27 +52,27 @@ namespace WindowsFormsApp1.WUI {
             // 
             this.ctrlSchedule.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.ctrlSchedule.FormattingEnabled = true;
-            this.ctrlSchedule.ItemHeight = 25;
+            this.ctrlSchedule.ItemHeight = 32;
             this.ctrlSchedule.Location = new System.Drawing.Point(56, 460);
             this.ctrlSchedule.Name = "ctrlSchedule";
-            this.ctrlSchedule.Size = new System.Drawing.Size(1059, 179);
+            this.ctrlSchedule.Size = new System.Drawing.Size(1059, 164);
             this.ctrlSchedule.TabIndex = 7;
             // 
             // list3
             // 
             this.list3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.list3.FormattingEnabled = true;
-            this.list3.ItemHeight = 21;
+            this.list3.ItemHeight = 28;
             this.list3.Location = new System.Drawing.Point(440, 106);
             this.list3.Name = "list3";
-            this.list3.Size = new System.Drawing.Size(308, 67);
+            this.list3.Size = new System.Drawing.Size(308, 60);
             this.list3.TabIndex = 6;
             // 
             // list1
             // 
             this.list1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.list1.FormattingEnabled = true;
-            this.list1.ItemHeight = 21;
+            this.list1.ItemHeight = 28;
             this.list1.Location = new System.Drawing.Point(24, 216);
             this.list1.Name = "list1";
             this.list1.Size = new System.Drawing.Size(400, 88);
@@ -81,7 +82,7 @@ namespace WindowsFormsApp1.WUI {
             // 
             this.listBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 21;
+            this.listBox1.ItemHeight = 28;
             this.listBox1.Location = new System.Drawing.Point(24, 106);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(400, 88);
@@ -105,13 +106,6 @@ namespace WindowsFormsApp1.WUI {
             this.button8.TabIndex = 9;
             this.button8.Text = "Remove";
             this.button8.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(448, 216);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 10;
             // 
             // button9
             // 
@@ -140,7 +134,7 @@ namespace WindowsFormsApp1.WUI {
             this.label6.ForeColor = System.Drawing.Color.SaddleBrown;
             this.label6.Location = new System.Drawing.Point(21, 54);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(426, 42);
+            this.label6.Size = new System.Drawing.Size(538, 54);
             this.label6.TabIndex = 13;
             this.label6.Text = "University Courses Scheduler";
             // 
@@ -156,14 +150,16 @@ namespace WindowsFormsApp1.WUI {
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mainToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(809, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(809, 28);
             this.menuStrip1.TabIndex = 15;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // mainToolStripMenuItem
             // 
@@ -175,61 +171,79 @@ namespace WindowsFormsApp1.WUI {
             this.loadDataToolStripMenuItem,
             this.saveDataToolStripMenuItem});
             this.mainToolStripMenuItem.Name = "mainToolStripMenuItem";
-            this.mainToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.mainToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
             this.mainToolStripMenuItem.Text = "Main";
             // 
             // initializeDedomenaToolStripMenuItem
             // 
             this.initializeDedomenaToolStripMenuItem.Name = "initializeDedomenaToolStripMenuItem";
-            this.initializeDedomenaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.initializeDedomenaToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
             this.initializeDedomenaToolStripMenuItem.Text = "Initialize Dedomena";
             this.initializeDedomenaToolStripMenuItem.Click += new System.EventHandler(this.initializeDedomenaToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(223, 6);
             // 
             // addToScheduleToolStripMenuItem
             // 
             this.addToScheduleToolStripMenuItem.Name = "addToScheduleToolStripMenuItem";
-            this.addToScheduleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addToScheduleToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
             this.addToScheduleToolStripMenuItem.Text = "Add To Schedule...";
             this.addToScheduleToolStripMenuItem.Click += new System.EventHandler(this.addToScheduleToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(223, 6);
             // 
             // loadDataToolStripMenuItem
             // 
             this.loadDataToolStripMenuItem.Name = "loadDataToolStripMenuItem";
-            this.loadDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadDataToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
             this.loadDataToolStripMenuItem.Text = "Load Data";
             this.loadDataToolStripMenuItem.Click += new System.EventHandler(this.loadDataToolStripMenuItem_Click);
             // 
             // saveDataToolStripMenuItem
             // 
             this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
             this.saveDataToolStripMenuItem.Text = "Save Data";
             this.saveDataToolStripMenuItem.Click += new System.EventHandler(this.saveDataToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
-            // DataForm1
+            // ctrlDate
+            // 
+            this.ctrlDate.Location = new System.Drawing.Point(532, 172);
+            this.ctrlDate.Name = "ctrlDate";
+            this.ctrlDate.Size = new System.Drawing.Size(200, 22);
+            this.ctrlDate.TabIndex = 16;
+            // 
+            // ctrlTime
+            // 
+            this.ctrlTime.CustomFormat = "HH:mm";
+            this.ctrlTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.ctrlTime.Location = new System.Drawing.Point(532, 216);
+            this.ctrlTime.Name = "ctrlTime";
+            this.ctrlTime.Size = new System.Drawing.Size(200, 22);
+            this.ctrlTime.TabIndex = 17;
+            this.ctrlTime.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
+            // CourseSchedulerForm
             // 
             this.ClientSize = new System.Drawing.Size(809, 737);
+            this.Controls.Add(this.ctrlTime);
+            this.Controls.Add(this.ctrlDate);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
-            this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.ctrlExit);
             this.Controls.Add(this.ctrlSchedule);
@@ -238,8 +252,9 @@ namespace WindowsFormsApp1.WUI {
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "DataForm1";
-            this.Load += new System.EventHandler(this.DataForm1_Load);
+            this.Name = "CourseSchedulerForm";
+            this.Text = "University Courses Scheduler ";
+            this.Load += new System.EventHandler(this.CourseSchedulerForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -272,7 +287,6 @@ namespace WindowsFormsApp1.WUI {
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button ctrlExit;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label6;
@@ -286,5 +300,7 @@ namespace WindowsFormsApp1.WUI {
         private System.Windows.Forms.ToolStripMenuItem loadDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.DateTimePicker ctrlDate;
+        private System.Windows.Forms.DateTimePicker ctrlTime;
     }
 }
