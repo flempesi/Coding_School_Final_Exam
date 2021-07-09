@@ -28,24 +28,15 @@ namespace WindowsFormsApp1.WUI {
             this.list3 = new System.Windows.Forms.ListBox();
             this.list1 = new System.Windows.Forms.ListBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.ctrlExit = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.mainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.initializeDedomenaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.addToScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.loadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ctrlDate = new System.Windows.Forms.DateTimePicker();
             this.ctrlTime = new System.Windows.Forms.DateTimePicker();
-            this.menuStrip1.SuspendLayout();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnCancel = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // ctrlSchedule
@@ -73,7 +64,7 @@ namespace WindowsFormsApp1.WUI {
             this.list1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.list1.FormattingEnabled = true;
             this.list1.ItemHeight = 28;
-            this.list1.Location = new System.Drawing.Point(24, 216);
+            this.list1.Location = new System.Drawing.Point(24, 328);
             this.list1.Name = "list1";
             this.list1.Size = new System.Drawing.Size(400, 88);
             this.list1.TabIndex = 5;
@@ -83,140 +74,51 @@ namespace WindowsFormsApp1.WUI {
             this.listBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 28;
-            this.listBox1.Location = new System.Drawing.Point(24, 106);
+            this.listBox1.Location = new System.Drawing.Point(24, 225);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(400, 88);
             this.listBox1.TabIndex = 4;
             // 
-            // ctrlExit
+            // btnAdd
             // 
-            this.ctrlExit.Location = new System.Drawing.Point(468, 256);
-            this.ctrlExit.Name = "ctrlExit";
-            this.ctrlExit.Size = new System.Drawing.Size(143, 32);
-            this.ctrlExit.TabIndex = 8;
-            this.ctrlExit.Text = "Add";
-            this.ctrlExit.UseVisualStyleBackColor = true;
-            this.ctrlExit.Click += new System.EventHandler(this.ctrlExit_Click);
+            this.btnAdd.Location = new System.Drawing.Point(468, 256);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(143, 32);
+            this.btnAdd.TabIndex = 8;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // button8
+            // btnRemove
             // 
-            this.button8.Location = new System.Drawing.Point(56, 422);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(143, 32);
-            this.button8.TabIndex = 9;
-            this.button8.Text = "Remove";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btnRemove.Location = new System.Drawing.Point(56, 422);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(143, 32);
+            this.btnRemove.TabIndex = 9;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
-            // button9
+            // btnSave
             // 
-            this.button9.Location = new System.Drawing.Point(505, 645);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(143, 32);
-            this.button9.TabIndex = 11;
-            this.button9.Text = "Load";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(654, 645);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(143, 32);
-            this.button10.TabIndex = 12;
-            this.button10.Text = "Save";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.btnSave.Location = new System.Drawing.Point(411, 641);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(143, 32);
+            this.btnSave.TabIndex = 12;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Calibri", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.label6.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.label6.Location = new System.Drawing.Point(21, 54);
+            this.label6.Location = new System.Drawing.Point(146, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(538, 54);
             this.label6.TabIndex = 13;
             this.label6.Text = "University Courses Scheduler";
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(610, 57);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(187, 32);
-            this.button11.TabIndex = 14;
-            this.button11.Text = "Initialize (only run once!)";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mainToolStripMenuItem,
-            this.exitToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(809, 28);
-            this.menuStrip1.TabIndex = 15;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
-            // 
-            // mainToolStripMenuItem
-            // 
-            this.mainToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.initializeDedomenaToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.addToScheduleToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.loadDataToolStripMenuItem,
-            this.saveDataToolStripMenuItem});
-            this.mainToolStripMenuItem.Name = "mainToolStripMenuItem";
-            this.mainToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
-            this.mainToolStripMenuItem.Text = "Main";
-            // 
-            // initializeDedomenaToolStripMenuItem
-            // 
-            this.initializeDedomenaToolStripMenuItem.Name = "initializeDedomenaToolStripMenuItem";
-            this.initializeDedomenaToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
-            this.initializeDedomenaToolStripMenuItem.Text = "Initialize Dedomena";
-            this.initializeDedomenaToolStripMenuItem.Click += new System.EventHandler(this.initializeDedomenaToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(223, 6);
-            // 
-            // addToScheduleToolStripMenuItem
-            // 
-            this.addToScheduleToolStripMenuItem.Name = "addToScheduleToolStripMenuItem";
-            this.addToScheduleToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
-            this.addToScheduleToolStripMenuItem.Text = "Add To Schedule...";
-            this.addToScheduleToolStripMenuItem.Click += new System.EventHandler(this.addToScheduleToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(223, 6);
-            // 
-            // loadDataToolStripMenuItem
-            // 
-            this.loadDataToolStripMenuItem.Name = "loadDataToolStripMenuItem";
-            this.loadDataToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
-            this.loadDataToolStripMenuItem.Text = "Load Data";
-            this.loadDataToolStripMenuItem.Click += new System.EventHandler(this.loadDataToolStripMenuItem_Click);
-            // 
-            // saveDataToolStripMenuItem
-            // 
-            this.saveDataToolStripMenuItem.Name = "saveDataToolStripMenuItem";
-            this.saveDataToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
-            this.saveDataToolStripMenuItem.Text = "Save Data";
-            this.saveDataToolStripMenuItem.Click += new System.EventHandler(this.saveDataToolStripMenuItem_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
-            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // ctrlDate
             // 
@@ -233,30 +135,47 @@ namespace WindowsFormsApp1.WUI {
             this.ctrlTime.Name = "ctrlTime";
             this.ctrlTime.Size = new System.Drawing.Size(200, 22);
             this.ctrlTime.TabIndex = 17;
-            this.ctrlTime.ValueChanged += new System.EventHandler(this.dateTimePicker3_ValueChanged);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(24, 66);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.TabIndex = 18;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(608, 641);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(147, 32);
+            this.btnCancel.TabIndex = 19;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // CourseSchedulerForm
             // 
             this.ClientSize = new System.Drawing.Size(809, 737);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ctrlTime);
             this.Controls.Add(this.ctrlDate);
-            this.Controls.Add(this.button11);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.ctrlExit);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.ctrlSchedule);
             this.Controls.Add(this.list3);
             this.Controls.Add(this.list1);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "CourseSchedulerForm";
             this.Text = "University Courses Scheduler ";
             this.Load += new System.EventHandler(this.CourseSchedulerForm_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,22 +204,13 @@ namespace WindowsFormsApp1.WUI {
         private System.Windows.Forms.ListBox list3;
         private System.Windows.Forms.ListBox list1;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button ctrlExit;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem mainToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem initializeDedomenaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem addToScheduleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem loadDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.DateTimePicker ctrlDate;
         private System.Windows.Forms.DateTimePicker ctrlTime;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
