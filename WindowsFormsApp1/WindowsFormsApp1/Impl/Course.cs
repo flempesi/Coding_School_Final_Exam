@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WindowsFormsApp1.Base;
 
 namespace WindowsFormsApp1.Impl {
-    class Course : Entity{
+    public class Course : Entity {
         public string Code { get; set; }
         public string Subject { get; set; }
         public int Hours { get; set; }
