@@ -145,7 +145,7 @@ namespace WindowsFormsApp1.WUI {
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(240, 150);
             this.dataGridView1.TabIndex = 18;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            //this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnCancel
             // 
@@ -182,24 +182,7 @@ namespace WindowsFormsApp1.WUI {
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtLog;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        
-        private System.Windows.Forms.Button button6;
- 
-        private System.Windows.Forms.Label label2;
-
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-  
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+       
         private System.Windows.Forms.ListBox ctrlSchedule;
         private System.Windows.Forms.ListBox list3;
         private System.Windows.Forms.ListBox list1;
