@@ -34,8 +34,15 @@ namespace WindowsFormsApp1.WUI {
             this.label6 = new System.Windows.Forms.Label();
             this.ctrlDate = new System.Windows.Forms.DateTimePicker();
             this.ctrlTime = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCourses = new System.Windows.Forms.DataGridView();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Subject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCourses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +61,7 @@ namespace WindowsFormsApp1.WUI {
             this.list3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.list3.FormattingEnabled = true;
             this.list3.ItemHeight = 28;
-            this.list3.Location = new System.Drawing.Point(440, 106);
+            this.list3.Location = new System.Drawing.Point(468, 262);
             this.list3.Name = "list3";
             this.list3.Size = new System.Drawing.Size(308, 60);
             this.list3.TabIndex = 6;
@@ -81,7 +88,7 @@ namespace WindowsFormsApp1.WUI {
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(468, 256);
+            this.btnAdd.Location = new System.Drawing.Point(468, 413);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(143, 32);
             this.btnAdd.TabIndex = 8;
@@ -122,7 +129,7 @@ namespace WindowsFormsApp1.WUI {
             // 
             // ctrlDate
             // 
-            this.ctrlDate.Location = new System.Drawing.Point(532, 172);
+            this.ctrlDate.Location = new System.Drawing.Point(522, 328);
             this.ctrlDate.Name = "ctrlDate";
             this.ctrlDate.Size = new System.Drawing.Size(200, 22);
             this.ctrlDate.TabIndex = 16;
@@ -131,21 +138,26 @@ namespace WindowsFormsApp1.WUI {
             // 
             this.ctrlTime.CustomFormat = "HH:mm";
             this.ctrlTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ctrlTime.Location = new System.Drawing.Point(532, 216);
+            this.ctrlTime.Location = new System.Drawing.Point(522, 366);
             this.ctrlTime.Name = "ctrlTime";
             this.ctrlTime.Size = new System.Drawing.Size(200, 22);
             this.ctrlTime.TabIndex = 17;
             // 
-            // dataGridView1
+            // dataGridViewCourses
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(24, 66);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 18;
-            //this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridViewCourses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCourses.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Code,
+            this.Subject,
+            this.Hours,
+            this.Category,
+            this.ID});
+            this.dataGridViewCourses.Location = new System.Drawing.Point(34, 57);
+            this.dataGridViewCourses.Name = "dataGridViewCourses";
+            this.dataGridViewCourses.RowHeadersWidth = 51;
+            this.dataGridViewCourses.RowTemplate.Height = 24;
+            this.dataGridViewCourses.Size = new System.Drawing.Size(554, 150);
+            this.dataGridViewCourses.TabIndex = 18;
             // 
             // btnCancel
             // 
@@ -157,11 +169,63 @@ namespace WindowsFormsApp1.WUI {
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // Code
+            // 
+            this.Code.HeaderText = "Code";
+            this.Code.MinimumWidth = 6;
+            this.Code.Name = "Code";
+            this.Code.ReadOnly = true;
+            this.Code.Width = 125;
+            // 
+            // Subject
+            // 
+            this.Subject.HeaderText = "Subject";
+            this.Subject.MinimumWidth = 6;
+            this.Subject.Name = "Subject";
+            this.Subject.ReadOnly = true;
+            this.Subject.Width = 125;
+            // 
+            // Hours
+            // 
+            this.Hours.HeaderText = "Hours";
+            this.Hours.MinimumWidth = 6;
+            this.Hours.Name = "Hours";
+            this.Hours.ReadOnly = true;
+            this.Hours.Width = 125;
+            // 
+            // Category
+            // 
+            this.Category.HeaderText = "Category";
+            this.Category.MinimumWidth = 6;
+            this.Category.Name = "Category";
+            this.Category.ReadOnly = true;
+            this.Category.Width = 125;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 6;
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            this.ID.Width = 125;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(545, 66);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.TabIndex = 20;
+            // 
             // CourseSchedulerForm
             // 
             this.ClientSize = new System.Drawing.Size(809, 737);
-            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.dataGridViewCourses);
             this.Controls.Add(this.ctrlTime);
             this.Controls.Add(this.ctrlDate);
             this.Controls.Add(this.label6);
@@ -175,6 +239,7 @@ namespace WindowsFormsApp1.WUI {
             this.Name = "CourseSchedulerForm";
             this.Text = "University Courses Scheduler ";
             this.Load += new System.EventHandler(this.CourseSchedulerForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCourses)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -193,7 +258,13 @@ namespace WindowsFormsApp1.WUI {
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker ctrlDate;
         private System.Windows.Forms.DateTimePicker ctrlTime;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewCourses;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Subject;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Hours;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Category;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
