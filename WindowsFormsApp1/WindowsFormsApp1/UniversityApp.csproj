@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Entity.cs" />
+    <Compile Include="Base\Person.cs" />
     <Compile Include="WUI\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,8 +93,6 @@
   <ItemGroup>
     <None Include="Resources\token_1.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Base\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
