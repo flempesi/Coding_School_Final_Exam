@@ -14,6 +14,13 @@ namespace WindowsFormsApp1.Impl {
         public Course() {
 
         }
+        public Course(string code, string subject, int hours, CoursesCategoryEnum category) : base(){
+             
+            Code = code;
+            Subject = subject;
+            Hours = hours;
+            Category = category;
+        }
 
     }
 }
