@@ -143,12 +143,12 @@ namespace WindowsFormsApp1.Impl {
     }
 
    
-    public enum CoursesCategoryEnum {
-        Physics,
-        Mathematics,
-        Chemistry,
-        Financial
-    }
+    //public enum CoursesCategoryEnum {
+    //    Physics,
+    //    Mathematics,
+    //    Chemistry,
+    //    Financial
+    //}
 
 }
 
