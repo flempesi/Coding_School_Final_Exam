@@ -8,9 +8,13 @@ using WindowsFormsApp1.Base;
 namespace WindowsFormsApp1.Impl {
     public class Professor : Person{
         public string Rank { get; set; }
-        public List<Course> Courses { get; set; }
-        public Professor() {
-
+       
+        public Professor() : base() {
+            
+        }
+        public Professor(string name, string surname, int age, string rank) : base(name,surname,age) {
+            Rank = rank;
+            
         }
     }
 }
