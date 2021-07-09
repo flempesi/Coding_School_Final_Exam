@@ -14,7 +14,7 @@ namespace WindowsFormsApp1.WUI {
 
         public University NewUniversity = new University();
         private Storage _Storage = new Storage();
-        private const string _JsonFile = "UniversityData.json";
+        
 
         public CourseSchedulerForm() {
             InitializeComponent();

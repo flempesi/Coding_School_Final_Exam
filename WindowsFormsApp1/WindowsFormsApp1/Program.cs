@@ -20,7 +20,8 @@ namespace WindowsFormsApp1 {
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CourseSchedulerForm());
+            Application.Run(new MDIForm());
+            //Application.Run(new CourseSchedulerForm());
 
         }
     }
