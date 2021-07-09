@@ -30,7 +30,7 @@ namespace WindowsFormsApp1.WUI {
             objects = r.Deserialize<University>(File.ReadAllText("Data.json"));
 
             foreach (Student a in objects.Students) {
-                list1.Items.Add(a.name + " " + a.surname);
+                list1.Items.Add(a.Name + " " + a.Surname);
             }
 
             for (int i = 0; i < objects._course.Count - 1; i++) {
@@ -62,7 +62,7 @@ namespace WindowsFormsApp1.WUI {
             objects.run_once();
 
             foreach (Student a in objects.Students) {
-                list1.Items.Add(a.name + " " + a.surname);
+                list1.Items.Add(a.Name + " " + a.Surname);
             }
 
             foreach (Course bb in objects._course) {
@@ -86,7 +86,7 @@ namespace WindowsFormsApp1.WUI {
             objects = GG.Deserialize<University>(File.ReadAllText("Data.json"));
 
             foreach (Student a in objects.Students) {
-                list1.Items.Add(a.name + " " + a.surname);
+                list1.Items.Add(a.Name + " " + a.Surname);
             }
 
             for (int i = 0; i < objects._course.Count - 1; i++) {
@@ -151,7 +151,7 @@ namespace WindowsFormsApp1.WUI {
             objects.run_once();
 
             foreach (Student a in objects.Students) {
-                list1.Items.Add(a.name + " " + a.surname);
+                list1.Items.Add(a.Name + " " + a.Surname);
             }
 
             foreach (Course bb in objects._course) {

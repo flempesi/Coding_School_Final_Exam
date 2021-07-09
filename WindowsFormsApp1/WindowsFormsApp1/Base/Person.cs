@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WindowsFormsApp1.Base {
-    class Person {
+    public class Person : Entity {
         public string Name { get; set; }
         public string Surname { get; set; }
         public int Age { get; set; }
