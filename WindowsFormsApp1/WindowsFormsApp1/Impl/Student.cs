@@ -8,9 +8,14 @@ using WindowsFormsApp1.Base;
 namespace WindowsFormsApp1.Impl {
     public class Student :Person{
         public string RegistrationNumber { get; set; }
-        public List<Course> Courses { get; set; }
+        
 
-        public Student() {
+        public Student() : base() {
+            
+        }
+        public Student(string name, string surname, int age,string registrationNumber) : base(name,surname,age) {
+            RegistrationNumber = registrationNumber;
+           
 
         }
     }
