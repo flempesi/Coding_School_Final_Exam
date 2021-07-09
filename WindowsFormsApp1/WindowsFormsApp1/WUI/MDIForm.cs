@@ -19,15 +19,23 @@ namespace WindowsFormsApp1.WUI {
             InitializeComponent();
         }
         private void MDIForm_Load(object sender, EventArgs e) {
+            NewUniversity.InsertDataToUniversity();
             _Storage.DeserializeFromJson();
         }
 
         private void courseSchedulerToolStripMenuItem_Click(object sender, EventArgs e) {
+            CourseSchedulerForm courseSchedulerForm = new CourseSchedulerForm();
+            courseSchedulerForm.MdiParent = this;
+            courseSchedulerForm.NewUniversity = NewUniversity;
+            courseSchedulerForm.Show();
             
         }
 
         private void addCourseToStudentToolStripMenuItem_Click(object sender, EventArgs e) {
-
+            AddCourseToStudentForm addCourseToStudentForm = new AddCourseToStudentForm();
+            addCourseToStudentForm.MdiParent = this;
+            //addCourseToStudentForm.NewUniversity = NewUniversity;
+            addCourseToStudentForm.Show();
         }
 
         

@@ -69,6 +69,18 @@
     <Compile Include="Impl\Schedule.cs" />
     <Compile Include="Impl\Student.cs" />
     <Compile Include="Storages\Storage.cs" />
+    <Compile Include="WUI\AddCourseToStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WUI\AddCourseToStudentForm.Designer.cs">
+      <DependentUpon>AddCourseToStudentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WUI\CourseSchedulerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WUI\CourseSchedulerForm.Designer.cs">
+      <DependentUpon>CourseSchedulerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="WUI\CourseSchedulerOldForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +96,12 @@
     <Compile Include="WUI\MDIForm.Designer.cs">
       <DependentUpon>MDIForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="WUI\AddCourseToStudentForm.resx">
+      <DependentUpon>AddCourseToStudentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WUI\CourseSchedulerForm.resx">
+      <DependentUpon>CourseSchedulerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="WUI\CourseSchedulerOldForm.resx">
       <DependentUpon>CourseSchedulerOldForm.cs</DependentUpon>
     </EmbeddedResource>
