@@ -55,7 +55,7 @@ namespace WindowsFormsApp1.WUI {
             // ctrlDate
             // 
             this.ctrlDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.ctrlDate.Location = new System.Drawing.Point(287, 246);
+            this.ctrlDate.Location = new System.Drawing.Point(314, 246);
             this.ctrlDate.Name = "ctrlDate";
             this.ctrlDate.Size = new System.Drawing.Size(337, 26);
             this.ctrlDate.TabIndex = 22;
@@ -66,7 +66,7 @@ namespace WindowsFormsApp1.WUI {
             this.ctrlTime.CustomFormat = "HH:mm";
             this.ctrlTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.ctrlTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ctrlTime.Location = new System.Drawing.Point(642, 246);
+            this.ctrlTime.Location = new System.Drawing.Point(685, 246);
             this.ctrlTime.Name = "ctrlTime";
             this.ctrlTime.Size = new System.Drawing.Size(200, 26);
             this.ctrlTime.TabIndex = 23;
@@ -78,7 +78,7 @@ namespace WindowsFormsApp1.WUI {
             this.btnAdd.ForeColor = System.Drawing.Color.White;
             this.btnAdd.Location = new System.Drawing.Point(314, 298);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(352, 47);
+            this.btnAdd.Size = new System.Drawing.Size(337, 47);
             this.btnAdd.TabIndex = 24;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = false;
@@ -108,7 +108,7 @@ namespace WindowsFormsApp1.WUI {
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label3.Location = new System.Drawing.Point(51, 246);
+            this.label3.Location = new System.Drawing.Point(50, 246);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(218, 20);
             this.label3.TabIndex = 27;
@@ -138,7 +138,7 @@ namespace WindowsFormsApp1.WUI {
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label4.Location = new System.Drawing.Point(424, 379);
+            this.label4.Location = new System.Drawing.Point(413, 379);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(165, 20);
             this.label4.TabIndex = 30;
