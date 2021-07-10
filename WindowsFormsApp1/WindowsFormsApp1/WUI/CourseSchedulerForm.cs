@@ -40,6 +40,10 @@ namespace WindowsFormsApp1.WUI {
             DeleteSchedule();
         }
         private void OnLoad() {
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximumSize = this.Size;
+            this.MinimumSize = this.Size;
+
             ctrlTime.ShowUpDown = true;
             LoadGridViewCourses();
             LoadGridViewProfessors();
@@ -49,18 +53,12 @@ namespace WindowsFormsApp1.WUI {
         }
 
         public void LoadGridViewCourses() {
-            dataGridViewCourses.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCourses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCourses.ReadOnly = true;
-            dataGridViewCourses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            SetDataGridViewProperties(dataGridViewCourses);
             dataGridViewCourses.DataSource = NewUniversity.Courses;
             dataGridViewCourses.Columns["Id"].Visible = false;
         }
         public void LoadGridViewProfessors() {
-            dataGridViewProfessors.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewProfessors.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewProfessors.ReadOnly = true;
-            dataGridViewProfessors.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            SetDataGridViewProperties(dataGridViewProfessors);
             dataGridViewProfessors.DataSource = NewUniversity.Professors;
             dataGridViewProfessors.Columns["Id"].Visible = false;
             dataGridViewProfessors.Columns["Age"].Visible = false;
@@ -73,17 +71,29 @@ namespace WindowsFormsApp1.WUI {
             DateTime dateTime = Convert.ToDateTime(dateTimeValue);
             return dateTime;
         }
+        public void SetDataGridViewProperties(DataGridView dataGridView) {
+            dataGridView.AllowUserToAddRows = false;
+            dataGridView.AllowUserToResizeRows = false;
+            dataGridView.RowHeadersVisible = false;
+            dataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSteelBlue;
+            dataGridView.EnableHeadersVisualStyles = false;
+            dataGridView.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
+            dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView.ReadOnly = true;
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
 
         public void AddSchedule() {
-            
+
             if (dataGridViewCourses.SelectedRows.Count == 1 && dataGridViewProfessors.SelectedRows.Count == 1) {
                 DataGridViewRow rowCourse = dataGridViewCourses.SelectedRows[0];
                 DataGridViewRow rowProfessor = dataGridViewProfessors.SelectedRows[0];
-                Guid courseID = Guid.Parse(rowCourse.Cells["id"].Value.ToString());
-                Guid professorID = Guid.Parse(rowProfessor.Cells["id"].Value.ToString());
+                Guid courseID = Guid.Parse(rowCourse.Cells["Id"].Value.ToString());
+                Guid professorID = Guid.Parse(rowProfessor.Cells["Id"].Value.ToString());
                 DateTime dateTimeSchedule = GetDateTime();
 
-                if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule,courseID) &&
+                if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule, courseID) &&
                     CheckMaxCoursesForProfessor(professorID, dateTimeSchedule)) {
                     _ScheduleList.Add(new Schedule(professorID, courseID, dateTimeSchedule));
                     RefreshDataGridSchedule();
@@ -91,11 +101,7 @@ namespace WindowsFormsApp1.WUI {
             }
         }
         public void RefreshDataGridSchedule() {
-            dataGridViewSchedules.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewSchedules.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewSchedules.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewSchedules.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewSchedules.ReadOnly = true;
+            SetDataGridViewProperties(dataGridViewSchedules);
             dataGridViewSchedules.Rows.Clear();
             MakeColumnsDataGridView();
             SetRowsDataGridView();
@@ -113,42 +119,44 @@ namespace WindowsFormsApp1.WUI {
 
             dataGridViewSchedules.Columns["Id"].Visible = false;
         }
+
+
         public void SetRowsDataGridView() {
 
             List<string[]> rows = new List<string[]>();
             foreach (var item in _ScheduleList) {
                 string ScheduleId = item.Id.ToString();
                 string name = NewUniversity.Professors.Find(x => x.Id == item.ProfessorID).Name;
-                string surname= NewUniversity.Professors.Find(x => x.Id == item.ProfessorID).Surname;
-                string CourseSubject= NewUniversity.Courses.Find(x => x.Id == item.CourseID).Subject;
-                string datetime= item.DateTimeSchedule.ToString();
-                rows.Add(new string[] { ScheduleId, CourseSubject, name, surname, datetime});
+                string surname = NewUniversity.Professors.Find(x => x.Id == item.ProfessorID).Surname;
+                string CourseSubject = NewUniversity.Courses.Find(x => x.Id == item.CourseID).Subject;
+                string datetime = item.DateTimeSchedule.ToString();
+                rows.Add(new string[] { ScheduleId, CourseSubject, name, surname, datetime });
             }
-          
+
             foreach (string[] rowArray in rows) {
                 dataGridViewSchedules.Rows.Add(rowArray);
             }
         }
         public void DeleteSchedule() {
-            if (dataGridViewSchedules.SelectedRows.Count==1 &&
+            if (dataGridViewSchedules.SelectedRows.Count == 1 &&
                  dataGridViewSchedules.CurrentRow.Index != dataGridViewSchedules.Rows.Count - 1)//to not select the empty row
                       {
                 DataGridViewRow rowSchedule = dataGridViewSchedules.SelectedRows[0];
-                Guid scheduleID = Guid.Parse(rowSchedule.Cells["id"].Value.ToString());
+                Guid scheduleID = Guid.Parse(rowSchedule.Cells["Id"].Value.ToString());
                 Schedule schedule = _ScheduleList.Find(x => x.Id == scheduleID);
                 _ScheduleList.Remove(schedule);
                 RefreshDataGridSchedule();
             }
-            
+
         }
         private void SaveButtonActions() {
             // todo: add exception handling?
             if (dataGridViewSchedules.Rows.Count > 1) {
-            NewUniversity.ScheduleList = _ScheduleList;
+                NewUniversity.ScheduleList = _ScheduleList;
                 _Storage.NewUniversity = NewUniversity;
-            _Storage.SerializeToJson();
-            _Storage.DeserializeFromJson();
-             NewUniversity = _Storage.NewUniversity;
+                _Storage.SerializeToJson();
+                _Storage.DeserializeFromJson();
+                NewUniversity = _Storage.NewUniversity;
                 Close();
             }
             else {
@@ -160,7 +168,7 @@ namespace WindowsFormsApp1.WUI {
             //TODO: ???
 
         }
-        public bool CheckIfSameProfessorInSameDateTimeHasCourse(Guid professorId, DateTime dateTime,Guid courseid) {
+        public bool CheckIfSameProfessorInSameDateTimeHasCourse(Guid professorId, DateTime dateTime, Guid courseid) {
             //  CANNOT ADD SAME   PROFESSOR IN SAME DATE & HOUR
             //cannot add same course in same date
             List<Schedule> proffesorSceduleList = new List<Schedule>();
@@ -173,7 +181,7 @@ namespace WindowsFormsApp1.WUI {
                     if (item.DateTimeSchedule.Hour == dateTime.Hour) {
                         return false;
                     }
-                    else if (item.CourseID==courseid){
+                    else if (item.CourseID == courseid) {
                         return false;
 
                     }
@@ -183,7 +191,7 @@ namespace WindowsFormsApp1.WUI {
             return true;
 
         }
-       
+
         public bool CheckMaxCoursesForProfessor(Guid professorId, DateTime dateTime) {
             // A PROFESSOR CANNOT TEACH MORE THAN 4 COURSES PER DAY AND  40(20 right) COURSES PER WEEK
             List<Schedule> proffesorSceduleList = new List<Schedule>();

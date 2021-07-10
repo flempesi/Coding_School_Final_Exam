@@ -54,55 +54,63 @@ namespace WindowsFormsApp1.WUI {
             // 
             // ctrlDate
             // 
+            this.ctrlDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.ctrlDate.Location = new System.Drawing.Point(287, 246);
             this.ctrlDate.Name = "ctrlDate";
-            this.ctrlDate.Size = new System.Drawing.Size(200, 22);
+            this.ctrlDate.Size = new System.Drawing.Size(337, 26);
             this.ctrlDate.TabIndex = 22;
             this.ctrlDate.Value = new System.DateTime(2021, 7, 9, 21, 45, 43, 0);
             // 
             // ctrlTime
             // 
             this.ctrlTime.CustomFormat = "HH:mm";
+            this.ctrlTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.ctrlTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ctrlTime.Location = new System.Drawing.Point(558, 246);
+            this.ctrlTime.Location = new System.Drawing.Point(642, 246);
             this.ctrlTime.Name = "ctrlTime";
-            this.ctrlTime.Size = new System.Drawing.Size(200, 22);
+            this.ctrlTime.Size = new System.Drawing.Size(200, 26);
             this.ctrlTime.TabIndex = 23;
             // 
             // btnAdd
             // 
+            this.btnAdd.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnAdd.ForeColor = System.Drawing.Color.White;
             this.btnAdd.Location = new System.Drawing.Point(314, 298);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(352, 32);
+            this.btnAdd.Size = new System.Drawing.Size(352, 47);
             this.btnAdd.TabIndex = 24;
             this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.Location = new System.Drawing.Point(51, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 17);
+            this.label1.Size = new System.Drawing.Size(136, 20);
             this.label1.TabIndex = 25;
             this.label1.Text = "Select a course :";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label2.Location = new System.Drawing.Point(710, 29);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(158, 17);
+            this.label2.Size = new System.Drawing.Size(188, 20);
             this.label2.TabIndex = 26;
             this.label2.Text = "And select a professor :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label3.Location = new System.Drawing.Point(51, 246);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(184, 17);
+            this.label3.Size = new System.Drawing.Size(218, 20);
             this.label3.TabIndex = 27;
             this.label3.Text = "And select a date and time :";
             // 
@@ -119,7 +127,7 @@ namespace WindowsFormsApp1.WUI {
             // dataGridViewSchedules
             // 
             this.dataGridViewSchedules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSchedules.Location = new System.Drawing.Point(54, 405);
+            this.dataGridViewSchedules.Location = new System.Drawing.Point(54, 426);
             this.dataGridViewSchedules.Name = "dataGridViewSchedules";
             this.dataGridViewSchedules.RowHeadersWidth = 51;
             this.dataGridViewSchedules.RowTemplate.Height = 24;
@@ -129,47 +137,57 @@ namespace WindowsFormsApp1.WUI {
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(451, 372);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label4.Location = new System.Drawing.Point(424, 379);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 17);
+            this.label4.Size = new System.Drawing.Size(165, 20);
             this.label4.TabIndex = 30;
-            this.label4.Text = "Schedule :";
+            this.label4.Text = "Scheduled Courses :";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(808, 597);
+            this.btnSave.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(776, 611);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(109, 40);
+            this.btnSave.Size = new System.Drawing.Size(122, 49);
             this.btnSave.TabIndex = 31;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(923, 597);
+            this.btnCancel.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(906, 611);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(102, 40);
+            this.btnCancel.Size = new System.Drawing.Size(119, 49);
             this.btnCancel.TabIndex = 32;
             this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(889, 359);
+            this.btnDelete.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
+            this.btnDelete.Location = new System.Drawing.Point(848, 359);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(136, 40);
+            this.btnDelete.Size = new System.Drawing.Size(177, 40);
             this.btnDelete.TabIndex = 33;
             this.btnDelete.Text = "Delete a schedule";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // CourseSchedulerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 649);
+            this.ClientSize = new System.Drawing.Size(1064, 672);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
