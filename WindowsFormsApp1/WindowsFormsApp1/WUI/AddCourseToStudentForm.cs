@@ -39,6 +39,10 @@ namespace WindowsFormsApp1.WUI {
            DeleteCourse();
         }
         private void OnLoad() {
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximumSize = this.Size;
+            this.MinimumSize = this.Size;
+
             LoadGridViewCourses();
             LoadGridViewStudents();
             
