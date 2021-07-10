@@ -35,12 +35,12 @@ namespace WindowsFormsApp1.WUI {
             this.ctrlDate = new System.Windows.Forms.DateTimePicker();
             this.ctrlTime = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewCourses = new System.Windows.Forms.DataGridView();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Subject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Hours = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCourses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -108,12 +108,13 @@ namespace WindowsFormsApp1.WUI {
             // 
             // btnSave
             // 
+            this.btnSave.BackColor = System.Drawing.Color.PaleTurquoise;
             this.btnSave.Location = new System.Drawing.Point(411, 641);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(143, 32);
             this.btnSave.TabIndex = 12;
             this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label6
@@ -159,16 +160,6 @@ namespace WindowsFormsApp1.WUI {
             this.dataGridViewCourses.Size = new System.Drawing.Size(554, 150);
             this.dataGridViewCourses.TabIndex = 18;
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(608, 641);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(147, 32);
-            this.btnCancel.TabIndex = 19;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // Code
             // 
             this.Code.HeaderText = "Code";
@@ -210,6 +201,16 @@ namespace WindowsFormsApp1.WUI {
             this.ID.Visible = false;
             this.ID.Width = 125;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(608, 641);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(147, 32);
+            this.btnCancel.TabIndex = 19;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -220,7 +221,7 @@ namespace WindowsFormsApp1.WUI {
             this.dataGridView1.Size = new System.Drawing.Size(240, 150);
             this.dataGridView1.TabIndex = 20;
             // 
-            // CourseSchedulerForm
+            // CourseSchedulerOldForm
             // 
             this.ClientSize = new System.Drawing.Size(809, 737);
             this.Controls.Add(this.dataGridView1);
@@ -236,7 +237,7 @@ namespace WindowsFormsApp1.WUI {
             this.Controls.Add(this.list3);
             this.Controls.Add(this.list1);
             this.Controls.Add(this.listBox1);
-            this.Name = "CourseSchedulerForm";
+            this.Name = "CourseSchedulerOldForm";
             this.Text = "University Courses Scheduler ";
             this.Load += new System.EventHandler(this.CourseSchedulerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCourses)).EndInit();
