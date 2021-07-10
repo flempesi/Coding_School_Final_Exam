@@ -83,7 +83,7 @@ namespace WindowsFormsApp1.WUI {
                 Guid professorID = Guid.Parse(rowProfessor.Cells["id"].Value.ToString());
                 DateTime dateTimeSchedule = GetDateTime();
 
-                if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule) &&
+                if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule,courseID) &&
                     CheckMaxCoursesForProfessor(professorID, dateTimeSchedule)) {
                     _ScheduleList.Add(new Schedule(professorID, courseID, dateTimeSchedule));
                     RefreshDataGridSchedule();
@@ -160,32 +160,30 @@ namespace WindowsFormsApp1.WUI {
             //TODO: ???
 
         }
-        public bool CheckIfSameProfessorInSameDateTimeHasCourse(Guid professorId, DateTime dateTime) {
+        public bool CheckIfSameProfessorInSameDateTimeHasCourse(Guid professorId, DateTime dateTime,Guid courseid) {
             //  CANNOT ADD SAME   PROFESSOR IN SAME DATE & HOUR
+            //cannot add same course in same date
             List<Schedule> proffesorSceduleList = new List<Schedule>();
             proffesorSceduleList = _ScheduleList.FindAll(x => x.ProfessorID == professorId);
             foreach (var item in proffesorSceduleList) {
                 //if (item.DateTimeSchedule == dateTime) {
                 //    return false;
                 //}
-                if (item.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")
-                    && item.DateTimeSchedule.Hour== dateTime.Hour
-                    ) {
-                    return false;
+                if (item.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
+                    if (item.DateTimeSchedule.Hour == dateTime.Hour) {
+                        return false;
+                    }
+                    else if (item.CourseID==courseid){
+                        return false;
+
+                    }
                 }
 
             }
             return true;
 
         }
-        public void CheckIfSameStudentInSameDateTimeHasCourse() {
-            // TODO:   CANNOT ADD SAME STUDENT   IN SAME DATE & HOUR
-
-        }
-        public void CheckMaxCoursesPerStudentIsLessThan4PerDay() {
-            // TODO:   EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
-
-        }
+       
         public bool CheckMaxCoursesForProfessor(Guid professorId, DateTime dateTime) {
             // A PROFESSOR CANNOT TEACH MORE THAN 4 COURSES PER DAY AND  40(20 right) COURSES PER WEEK
             List<Schedule> proffesorSceduleList = new List<Schedule>();
