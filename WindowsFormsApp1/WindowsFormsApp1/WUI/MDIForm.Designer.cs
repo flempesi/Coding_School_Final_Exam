@@ -27,15 +27,16 @@ namespace WindowsFormsApp1.WUI {
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.courseSchedulerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.addCourseToStudentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.SteelBlue;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.courseSchedulerToolStripMenuItem,
@@ -49,17 +50,15 @@ namespace WindowsFormsApp1.WUI {
             // 
             // courseSchedulerToolStripMenuItem
             // 
+            this.courseSchedulerToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.courseSchedulerToolStripMenuItem.Name = "courseSchedulerToolStripMenuItem";
             this.courseSchedulerToolStripMenuItem.Size = new System.Drawing.Size(137, 24);
             this.courseSchedulerToolStripMenuItem.Text = "Course Scheduler";
             this.courseSchedulerToolStripMenuItem.Click += new System.EventHandler(this.courseSchedulerToolStripMenuItem_Click);
             // 
-            // popupMenu1
-            // 
-            this.popupMenu1.Name = "popupMenu1";
-            // 
             // addCourseToStudentToolStripMenuItem
             // 
+            this.addCourseToStudentToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.addCourseToStudentToolStripMenuItem.Name = "addCourseToStudentToolStripMenuItem";
             this.addCourseToStudentToolStripMenuItem.Size = new System.Drawing.Size(173, 24);
             this.addCourseToStudentToolStripMenuItem.Text = "Add Course to Student";
@@ -67,10 +66,15 @@ namespace WindowsFormsApp1.WUI {
             // 
             // exitToolStripMenuItem
             // 
+            this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // popupMenu1
+            // 
+            this.popupMenu1.Name = "popupMenu1";
             // 
             // MDIForm
             // 

@@ -19,39 +19,45 @@ namespace WindowsFormsApp1.WUI {
             InitializeComponent();
         }
         private void MDIForm_Load(object sender, EventArgs e) {
-            Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.LightSteelBlue;
+            Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.LightGray;
             //Initialize();
-
             _Storage.DeserializeFromJson();
             NewUniversity = _Storage.NewUniversity;
         }
 
-        private void Initialize() {
-            NewUniversity.InsertDataToUniversity();
-            _Storage.NewUniversity = NewUniversity;
-            _Storage.SerializeToJson();
+        private void courseSchedulerToolStripMenuItem_Click(object sender, EventArgs e) {
+            OpenCourseschedulerForm();
+
+        }
+        private void addCourseToStudentToolStripMenuItem_Click(object sender, EventArgs e) {
+            OpenAddCourseToStudentForm();
+        }
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
         }
 
-
-        private void courseSchedulerToolStripMenuItem_Click(object sender, EventArgs e) {
+        private void OpenCourseschedulerForm() {
             CourseSchedulerForm courseSchedulerForm = new CourseSchedulerForm();
             courseSchedulerForm.MdiParent = this;
             courseSchedulerForm.NewUniversity = NewUniversity;
             courseSchedulerForm.Show();
-            NewUniversity= courseSchedulerForm.NewUniversity ;
-
+            NewUniversity = courseSchedulerForm.NewUniversity;
         }
 
-        private void addCourseToStudentToolStripMenuItem_Click(object sender, EventArgs e) {
+        
+
+        private void OpenAddCourseToStudentForm() {
             AddCourseToStudentForm addCourseToStudentForm = new AddCourseToStudentForm();
             addCourseToStudentForm.MdiParent = this;
             addCourseToStudentForm.NewUniversity = NewUniversity;
             addCourseToStudentForm.Show();
             NewUniversity = addCourseToStudentForm.NewUniversity;
         }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e) {
-            Application.Exit();
+        private void Initialize() {
+            NewUniversity.InsertDataToUniversity();
+            _Storage.NewUniversity = NewUniversity;
+            _Storage.SerializeToJson();
         }
+
     }
 }
