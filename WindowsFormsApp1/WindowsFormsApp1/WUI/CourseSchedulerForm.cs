@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -197,19 +198,33 @@ namespace WindowsFormsApp1.WUI {
             List<Schedule> proffesorSceduleList = new List<Schedule>();
             proffesorSceduleList = _ScheduleList.FindAll(x => x.ProfessorID == professorId);
             int coursesPerDay = 0;
-            int coursesPerMonth = 0;
+            int coursesPerWeek = 0;
+            CultureInfo culture = CultureInfo.CurrentCulture;
+
             foreach (var item in proffesorSceduleList) {
 
                 if (item.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
                     coursesPerDay++;
                 }
-                if (item.DateTimeSchedule.Date.ToString("MM") == dateTime.Date.ToString("MM")) {
-                    coursesPerMonth++;
+                //if (item.DateTimeSchedule.WeekOfYear == dateTime.Date.ToString("MM")) {
+                //    coursesPerMonth++;
+                //}
+
+
+                //var firstDayWeek = cul.Calendar.GetWeekOfYear(item.DateTimeSchedule, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+                int weekNumberOfesheduledCourse = culture.Calendar.GetWeekOfYear(item.DateTimeSchedule, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+
+                int weekNumberOfCourse = culture.Calendar.GetWeekOfYear(dateTime.Date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+
+                if (weekNumberOfesheduledCourse == weekNumberOfCourse) {
+                    coursesPerWeek++;
+
                 }
 
-            }
-            if (coursesPerDay > 3 || coursesPerMonth > 20) {
-                return false;
+
+                if (coursesPerDay > 3 || coursesPerWeek > 20) {
+                    return false;
+                }
             }
             return true;
 
