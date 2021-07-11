@@ -112,7 +112,7 @@ namespace WindowsFormsApp1.WUI {
             this.btnDelete.TabIndex = 38;
             this.btnDelete.Text = "Delete a record";
             this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            //this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnCancel
             // 
