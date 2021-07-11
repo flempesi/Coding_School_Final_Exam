@@ -15,7 +15,7 @@ namespace WindowsFormsApp1.WUI {
     public partial class CourseSchedulerForm : Form {
 
         public University NewUniversity = new University();
-        private List<Schedule> ScheduleList { get; set; }
+        private List<Schedule> ScheduleList  = new List<Schedule>();
 
         private Storage Storage = new Storage();
 
@@ -47,7 +47,7 @@ namespace WindowsFormsApp1.WUI {
             ctrlTime.ShowUpDown = true;
             LoadGridViewCourses();
             LoadGridViewProfessors();
-            //ScheduleList = new List<Schedule>();
+            
             ScheduleList = NewUniversity.ScheduleList;
             RefreshDataGridSchedule();
         }
@@ -72,6 +72,7 @@ namespace WindowsFormsApp1.WUI {
             return dateTime;
         }
         public void SetDataGridViewProperties(DataGridView dataGridView) {
+            dataGridView.MultiSelect = false;
             dataGridView.AllowUserToAddRows = false;
             dataGridView.AllowUserToResizeRows = false;
             dataGridView.RowHeadersVisible = false;
@@ -119,13 +120,8 @@ namespace WindowsFormsApp1.WUI {
                 dataGridViewSchedules.Columns.Insert(0, DeleteButton);
                 dataGridViewSchedules.CellClick += new DataGridViewCellEventHandler(dataGridViewSchedules_DeleteButton_CellClick);
             }
-           
-            //new DataGridViewCellEventHandler(dataGridUsers_CellContentClick);
-
-
 
             dataGridViewSchedules.Columns[1].Name = "Id";
-            //dataGridViewSchedules.Columns[1].DataPropertyName = "Id";
             dataGridViewSchedules.Columns[2].Name = "Subject";
             dataGridViewSchedules.Columns[3].Name = "Professor Name";
             dataGridViewSchedules.Columns[4].Name = "Professor Surname";
@@ -135,8 +131,7 @@ namespace WindowsFormsApp1.WUI {
         }
         private void dataGridViewSchedules_DeleteButton_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.ColumnIndex == dataGridViewSchedules.Columns["Delete"].Index) {
-                int rowIndex = e.RowIndex ;
-                DeleteSchedule(rowIndex);
+                DeleteSchedule();
             }
         }
 
@@ -157,12 +152,7 @@ namespace WindowsFormsApp1.WUI {
                 dataGridViewSchedules.Rows.Add(rowArray);
             }
         }
-        public void DeleteSchedule( int rowIndex) {
-            //if (dataGridViewSchedules.SelectedRows.Count == 1 &&
-            // dataGridViewSchedules.CurrentRow.Index != dataGridViewSchedules.Rows.Count - 1)//to not select the empty row
-            //  {
-
-
+        public void DeleteSchedule() {
             if (dataGridViewSchedules.SelectedRows.Count == 1) {
                 int r = dataGridViewSchedules.SelectedRows[0].Index;
                 DataGridViewRow rowSchedule = dataGridViewSchedules.SelectedRows[0];
@@ -181,11 +171,9 @@ namespace WindowsFormsApp1.WUI {
 
         }
         private void SaveButtonActions() {
-            // todo: add exception handling?
+            
             if (dataGridViewSchedules.Rows.Count > 1 ) {
                 SaveChanges();
-                //Storage.DeserializeFromJson();
-                //NewUniversity = Storage.NewUniversity;
                 Close();
             }else if ( HasDeletedRecords == true) {
                 Close();
@@ -196,14 +184,13 @@ namespace WindowsFormsApp1.WUI {
         }
 
         private void SaveChanges() {
-            //NewUniversity.ScheduleList = ScheduleList;
             Storage.NewUniversity = NewUniversity;
             Storage.SerializeToJson();
         }
 
         public void validate_professorCourse_with_studentCourse() {
 
-            //TODO: ???
+            //TODO: ?Not doent need cause it did it logically cause i have two forms
 
         }
         public bool CheckIfSameProfessorInSameDateTimeHasCourse(Guid professorId, DateTime dateTime, Guid courseid) {
@@ -250,19 +237,15 @@ namespace WindowsFormsApp1.WUI {
                 int weekNumberOfesheduledCourse = culture.Calendar.GetWeekOfYear(item.DateTimeSchedule, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
 
                 int weekNumberOfCourse = culture.Calendar.GetWeekOfYear(dateTime.Date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
-
                 if (weekNumberOfesheduledCourse == weekNumberOfCourse) {
                     coursesPerWeek++;
 
                 }
-
-
                 if (coursesPerDay > 3 || coursesPerWeek > 20) {
                     return false;
                 }
             }
             return true;
-
         }
     }
 }
