@@ -13,10 +13,11 @@ using WindowsFormsApp1.Storages;
 namespace WindowsFormsApp1.WUI {
     public partial class AddCourseToStudentForm : Form {
         public University NewUniversity = new University();
-        //private List<Schedule> _ScheduleList { get; set; }
-        private List<Student> _StudentsList { get; set; }
+
+        private List<Student> _StudentsList = new List<Student>();
 
         private Storage _Storage = new Storage();
+        private bool HasDeletedRecords;
         public AddCourseToStudentForm() {
             InitializeComponent();
         }
@@ -35,9 +36,9 @@ namespace WindowsFormsApp1.WUI {
         private void btnAdd_Click(object sender, EventArgs e) {
             AddCourse();
         }
-        private void btnDelete_Click(object sender, EventArgs e) {
-            DeleteCourse();
-        }
+        //private void btnDelete_Click(object sender, EventArgs e) {
+        //    DeleteCourse();
+        //}
         private void OnLoad() {
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximumSize = this.Size;
@@ -46,7 +47,7 @@ namespace WindowsFormsApp1.WUI {
             LoadGridViewCourses();
             LoadGridViewStudents();
 
-            _StudentsList = new List<Student>();
+            //_StudentsList = new List<Student>();
             _StudentsList = NewUniversity.Students;
             RefreshDataGridScheduleStudents();
         }
@@ -64,7 +65,7 @@ namespace WindowsFormsApp1.WUI {
         }
 
         public void SetDataGridViewProperties(DataGridView dataGridView) {
-            dataGridView.MultiSelect = false;//
+            dataGridView.MultiSelect = false;
             dataGridView.AllowUserToAddRows = false;
             dataGridView.AllowUserToResizeRows = false;
             dataGridView.RowHeadersVisible = false;
@@ -105,21 +106,37 @@ namespace WindowsFormsApp1.WUI {
             SetRowsDataGridView();
         }
         public void MakeColumnsDataGridView() {
-            dGVScheduleStudents.ColumnCount = 8;
+            dGVScheduleStudents.ColumnCount = 9;
             dGVScheduleStudents.ColumnHeadersVisible = true;
 
-            dGVScheduleStudents.Columns[0].Name = "StudentId";
-            dGVScheduleStudents.Columns[1].Name = "CourseId";
-            dGVScheduleStudents.Columns[2].Name = "Subject";
-            dGVScheduleStudents.Columns[3].Name = "Professor Name";
-            dGVScheduleStudents.Columns[4].Name = "Professor Surname";
-            dGVScheduleStudents.Columns[5].Name = "Date";
-            dGVScheduleStudents.Columns[6].Name = "Student Name";
-            dGVScheduleStudents.Columns[7].Name = "Student Surname";
+            DataGridViewButtonColumn DeleteButton = new DataGridViewButtonColumn();
+            DeleteButton.Name = "Delete";
+            DeleteButton.Text = "Delete";
+            DeleteButton.UseColumnTextForButtonValue = true;
+            if (dGVScheduleStudents.Columns["Delete"] == null) {
+                dGVScheduleStudents.Columns.Insert(0, DeleteButton);
+                dGVScheduleStudents.CellClick += new DataGridViewCellEventHandler(dGVScheduleStudents_DeleteButton_CellClick);
+            }
+
+            dGVScheduleStudents.Columns[1].Name = "StudentId";
+            dGVScheduleStudents.Columns[2].Name = "CourseId";
+            dGVScheduleStudents.Columns[3].Name = "Subject";
+            dGVScheduleStudents.Columns[4].Name = "Professor Name";
+            dGVScheduleStudents.Columns[5].Name = "Professor Surname";
+            dGVScheduleStudents.Columns[6].Name = "Date";
+            dGVScheduleStudents.Columns[7].Name = "Student Name";
+            dGVScheduleStudents.Columns[8].Name = "Student Surname";
 
             dGVScheduleStudents.Columns["StudentId"].Visible = false;
             dGVScheduleStudents.Columns["CourseId"].Visible = false;
         }
+        private void dGVScheduleStudents_DeleteButton_CellClick(object sender, DataGridViewCellEventArgs e) {
+            if (e.ColumnIndex == dGVScheduleStudents.Columns["Delete"].Index) {
+                //int rowIndex = e.RowIndex;
+                DeleteCourse();
+            }
+        }
+
         public void SetRowsDataGridView() {
 
             List<string[]> rows = new List<string[]>();
@@ -152,29 +169,35 @@ namespace WindowsFormsApp1.WUI {
 
         public void DeleteCourse() {
             //
-            if (dGVScheduleStudents.SelectedRows.Count == 1)
-                    //&& dGVScheduleStudents.CurrentRow.Index != dGVScheduleStudents.Rows.Count - 1)//to not select the empty row
-                    {
+            if (dGVScheduleStudents.SelectedRows.Count == 1) {
                 DataGridViewRow rowSchedule = dGVScheduleStudents.SelectedRows[0];
                 Guid courseID = Guid.Parse(rowSchedule.Cells["CourseId"].Value.ToString());
                 Guid studentID = Guid.Parse(rowSchedule.Cells["StudentId"].Value.ToString());
 
                 Course course = _StudentsList.Find(x => x.Id == studentID).Courses.Find(x => x.Id == courseID);
-                //Schedule schedule = _ScheduleList.Find(x => x.Id == scheduleID);
 
-                _StudentsList.Find(x => x.Id == studentID).Courses.Remove(course);
-                RefreshDataGridScheduleStudents();
+                DialogResult result = MessageBox.Show("Are you sure to delete this record ? ", "Delete record", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes) {
+                    HasDeletedRecords = true;
+
+
+                    _StudentsList.Find(x => x.Id == studentID).Courses.Remove(course);
+                    RefreshDataGridScheduleStudents();
+
+                    SaveChanges();
+                }
+
+
             }
         }
         public void SaveButtonActions() {
 
             if (dGVScheduleStudents.Rows.Count > 0) {
-                NewUniversity.Students = _StudentsList;
-                _Storage.NewUniversity = NewUniversity;
-                _Storage.SerializeToJson();
-                //or onload
-                _Storage.DeserializeFromJson();
-                NewUniversity = _Storage.NewUniversity;
+                SaveChanges();
+                Close();
+
+            }
+            else if (HasDeletedRecords == true) {
                 Close();
             }
             else {
@@ -184,9 +207,14 @@ namespace WindowsFormsApp1.WUI {
 
 
         }
+
+        private void SaveChanges() {
+            _Storage.NewUniversity = NewUniversity;
+            _Storage.SerializeToJson();
+        }
+
         public bool CheckIfSameStudentInSameDateTimeHasCourse(Guid courseId, Guid studentId) {
             //    CANNOT ADD SAME STUDENT   IN SAME DATE & HOUR
-
 
             //cannot add same course in same date
             List<Schedule> sceduleListOfCourse = new List<Schedule>();
@@ -212,26 +240,17 @@ namespace WindowsFormsApp1.WUI {
                         }
                         //else if (item.CourseID == courseId) {
                         //    return false;
-                        if (coursePerDay>=3) {// EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
+                        if (coursePerDay >= 3) {// EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
                             return false;
                         }
                         coursePerDay++;
-
                         //}
                     }
 
                 }
-                
-
-
             }
             return true;
         }
-            public void CheckMaxCoursesPerStudentIsLessThan4PerDay() {
-                // TODO:   EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
 
-
-
-            }
-        }
     }
+}
