@@ -13,7 +13,7 @@ using WindowsFormsApp1.Storages;
 namespace WindowsFormsApp1.WUI {
     public partial class AddCourseToStudentForm : Form {
         public University NewUniversity = new University();
-        private List<Schedule> _ScheduleList { get; set; }
+        //private List<Schedule> _ScheduleList { get; set; }
         private List<Student> _StudentsList { get; set; }
 
         private Storage _Storage = new Storage();
@@ -36,7 +36,7 @@ namespace WindowsFormsApp1.WUI {
             AddCourse();
         }
         private void btnDelete_Click(object sender, EventArgs e) {
-           DeleteCourse();
+            DeleteCourse();
         }
         private void OnLoad() {
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -45,14 +45,13 @@ namespace WindowsFormsApp1.WUI {
 
             LoadGridViewCourses();
             LoadGridViewStudents();
-            
+
             _StudentsList = new List<Student>();
             _StudentsList = NewUniversity.Students;
             RefreshDataGridScheduleStudents();
         }
         public void LoadGridViewCourses() {
             SetDataGridViewProperties(dGVCoursesForStudents);
-            dGVCoursesForStudents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dGVCoursesForStudents.DataSource = NewUniversity.Courses;
             dGVCoursesForStudents.Columns["Id"].Visible = false;
         }
@@ -61,10 +60,11 @@ namespace WindowsFormsApp1.WUI {
             dGVStudents.DataSource = NewUniversity.Students;
             dGVStudents.Columns["Id"].Visible = false;
             dGVStudents.Columns["Age"].Visible = false;
-            
+
         }
 
         public void SetDataGridViewProperties(DataGridView dataGridView) {
+            dataGridView.MultiSelect = false;//
             dataGridView.AllowUserToAddRows = false;
             dataGridView.AllowUserToResizeRows = false;
             dataGridView.RowHeadersVisible = false;
@@ -85,14 +85,15 @@ namespace WindowsFormsApp1.WUI {
                 Guid studentID = Guid.Parse(rowProfessor.Cells["id"].Value.ToString());
                 //DateTime dateTimeSchedule = GetDateTime();
                 //Student student= _StudentsList.Find(x => x.Id == studentID);
-               // Course[] courses;
+                // Course[] courses;
                 Course course = _StudentsList.Find(x => x.Id == studentID).Courses.Find(x => x.Id == courseID);
-                if (course == null) {//if have already this lesson
-                    //if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule, courseID) &&
-                    //    CheckMaxCoursesForProfessor(professorID, dateTimeSchedule)) {
-                    _StudentsList.Find(x => x.Id == studentID).Courses.Add(NewUniversity.Courses.Find(x => x.Id == courseID));
-                    
-                    RefreshDataGridScheduleStudents();
+                if (course == null) {//if dont have already this lesson
+                    if (CheckIfSameStudentInSameDateTimeHasCourse(courseID, studentID)) {//&&
+                                                                                         //    CheckMaxCoursesForProfessor(professorID, dateTimeSchedule)) {
+                        _StudentsList.Find(x => x.Id == studentID).Courses.Add(NewUniversity.Courses.Find(x => x.Id == courseID));
+
+                        RefreshDataGridScheduleStudents();
+                    }
                 }
             }
         }
@@ -126,22 +127,22 @@ namespace WindowsFormsApp1.WUI {
                 string studentId = student.Id.ToString();
                 string studentName = NewUniversity.Students.Find(x => x.Id == student.Id).Name;
                 string studentSurname = NewUniversity.Students.Find(x => x.Id == student.Id).Surname;
-                
-                
+
+
                 foreach (var course in student.Courses) {
                     string courseId = course.Id.ToString();
                     string courseSubject = NewUniversity.Courses.Find(x => x.Id == course.Id).Subject;
 
                     //Guid scheduleListRowId = NewUniversity.ScheduleList.Find(x => x.CourseID == course.Id).Id;
                     Schedule schedule = NewUniversity.ScheduleList.Find(x => x.CourseID == course.Id);
-                    Guid professorId= NewUniversity.ScheduleList.Find(x => x.CourseID == course.Id).ProfessorID;
+                    Guid professorId = NewUniversity.ScheduleList.Find(x => x.CourseID == course.Id).ProfessorID;
                     string name = NewUniversity.Professors.Find(x => x.Id == professorId).Name;
                     string surname = NewUniversity.Professors.Find(x => x.Id == professorId).Surname;
                     string datetime = schedule.DateTimeSchedule.ToString();
 
-                    rows.Add(new string[] { studentId,courseId, courseSubject, name, surname, datetime, studentName, studentSurname });
+                    rows.Add(new string[] { studentId, courseId, courseSubject, name, surname, datetime, studentName, studentSurname });
                 }
-                
+
             }
 
             foreach (string[] rowArray in rows) {
@@ -151,8 +152,8 @@ namespace WindowsFormsApp1.WUI {
 
         public void DeleteCourse() {
             //
-            if (dGVScheduleStudents.SelectedRows.Count == 1 &&
-               dGVScheduleStudents.CurrentRow.Index != dGVScheduleStudents.Rows.Count - 1)//to not select the empty row
+            if (dGVScheduleStudents.SelectedRows.Count == 1)
+                    //&& dGVScheduleStudents.CurrentRow.Index != dGVScheduleStudents.Rows.Count - 1)//to not select the empty row
                     {
                 DataGridViewRow rowSchedule = dGVScheduleStudents.SelectedRows[0];
                 Guid courseID = Guid.Parse(rowSchedule.Cells["CourseId"].Value.ToString());
@@ -167,10 +168,11 @@ namespace WindowsFormsApp1.WUI {
         }
         public void SaveButtonActions() {
 
-            if (dGVScheduleStudents.Rows.Count > 1) {
+            if (dGVScheduleStudents.Rows.Count > 0) {
                 NewUniversity.Students = _StudentsList;
                 _Storage.NewUniversity = NewUniversity;
                 _Storage.SerializeToJson();
+                //or onload
                 _Storage.DeserializeFromJson();
                 NewUniversity = _Storage.NewUniversity;
                 Close();
@@ -182,13 +184,54 @@ namespace WindowsFormsApp1.WUI {
 
 
         }
-        public void CheckIfSameStudentInSameDateTimeHasCourse() {
-            // TODO:   CANNOT ADD SAME STUDENT   IN SAME DATE & HOUR
+        public bool CheckIfSameStudentInSameDateTimeHasCourse(Guid courseId, Guid studentId) {
+            //    CANNOT ADD SAME STUDENT   IN SAME DATE & HOUR
 
+
+            //cannot add same course in same date
+            List<Schedule> sceduleListOfCourse = new List<Schedule>();
+            List<Schedule> sceduleListOfStudent = new List<Schedule>();
+            sceduleListOfCourse = NewUniversity.ScheduleList.FindAll(x => x.CourseID == courseId);
+            DateTime dateTime;
+            List<Course> courses = new List<Course>();
+            courses = NewUniversity.Students.Find(x => x.Id == studentId).Courses;
+            int coursePerDay = 0;
+            foreach (var course in courses) {
+                sceduleListOfStudent = NewUniversity.ScheduleList.FindAll(x => x.CourseID == course.Id);
+            }
+
+            foreach (var scheduleCourse in sceduleListOfCourse) {
+                dateTime = scheduleCourse.DateTimeSchedule;
+                //if (item.DateTimeSchedule == dateTime) {
+                //    return false;
+                //}
+                foreach (var scheduleStudent in sceduleListOfStudent) {
+                    if (scheduleStudent.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
+                        if (scheduleStudent.DateTimeSchedule.Hour == dateTime.Hour) {
+                            return false;
+                        }
+                        //else if (item.CourseID == courseId) {
+                        //    return false;
+                        if (coursePerDay>=3) {// EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
+                            return false;
+                        }
+                        coursePerDay++;
+
+                        //}
+                    }
+
+                }
+                
+
+
+            }
+            return true;
         }
-        public void CheckMaxCoursesPerStudentIsLessThan4PerDay() {
-            // TODO:   EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
+            public void CheckMaxCoursesPerStudentIsLessThan4PerDay() {
+                // TODO:   EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
 
+
+
+            }
         }
     }
-}
