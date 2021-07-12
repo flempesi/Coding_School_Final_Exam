@@ -68,6 +68,8 @@
     <Compile Include="Impl\Professor.cs" />
     <Compile Include="Impl\Schedule.cs" />
     <Compile Include="Impl\Student.cs" />
+    <Compile Include="Methods\CommonMethods.cs" />
+    <Compile Include="Methods\CourseSchedulerMethods.cs" />
     <Compile Include="Storages\Storage.cs" />
     <Compile Include="WUI\AddCourseToStudentForm.cs">
       <SubType>Form</SubType>
