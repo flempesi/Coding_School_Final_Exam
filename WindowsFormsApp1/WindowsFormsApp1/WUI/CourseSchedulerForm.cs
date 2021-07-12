@@ -43,6 +43,10 @@ namespace WindowsFormsApp1.WUI {
             if (e.ColumnIndex == dGVSchedule.Columns["Delete"].Index) {
                 _CourseSchedulerDataMethods.DeleteSchedule(dGVSchedule, NewUniversity, _HasDeletedRecords, dataGridViewSchedules_DeleteButton_CellClick);
             }
-        }      
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e) {
+            _CourseSchedulerDGVMethods.RefreshData(dGVCourses, dGVProfessors, NewUniversity);
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace WindowsFormsApp1.Methods {
             LoadGridViewCourses(dGVCourses, newUniversity);
             LoadGridViewProfessors(dGVProfessors, newUniversity);
 
-            //ScheduleList = NewUniversity.ScheduleList;
+
             RefreshDataGridSchedule(dGVSchedule, newUniversity, dataGridViewSchedules_DeleteButton_CellClick);
         }
         public void LoadGridViewProfessors(DataGridView dGVProfessors, University NewUniversity) {
@@ -86,6 +86,12 @@ namespace WindowsFormsApp1.Methods {
         #endregion
 
         #region refreshMethods
+        public void RefreshData(DataGridView dGVCourses, DataGridView dGVProfessors, University newUniversity) {
+            dGVProfessors.Rows.Clear();
+            LoadGridViewProfessors( dGVProfessors,  newUniversity);
+            dGVCourses.Rows.Clear();
+            LoadGridViewCourses( dGVCourses,  newUniversity);
+        }
         public void RefreshDataGridSchedule(DataGridView dGVSchedule, University newUniversity, Action<object, DataGridViewCellEventArgs> dataGridViewSchedules_DeleteButton_CellClick) {
             _CommonDGVMethods.SetDataGridViewProperties(dGVSchedule);
             dGVSchedule.Rows.Clear();

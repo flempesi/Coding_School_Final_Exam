@@ -36,6 +36,7 @@ namespace WindowsFormsApp1.WUI {
             this.label4 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVCourses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVProfessors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVSchedule)).BeginInit();
@@ -169,11 +170,25 @@ namespace WindowsFormsApp1.WUI {
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Location = new System.Drawing.Point(535, 21);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(131, 36);
+            this.btnRefresh.TabIndex = 39;
+            this.btnRefresh.Text = "Refresh Data";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // CourseSchedulerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 672);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label4);
@@ -211,5 +226,6 @@ namespace WindowsFormsApp1.WUI {
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
