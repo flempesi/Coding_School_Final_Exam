@@ -19,20 +19,7 @@ namespace WindowsFormsApp1.Impl {
             ScheduleList = new List<Schedule>();
         }
 
-        public void InsertDataToUniversity() {
-            //Courses
-            Courses.Add(new Course("111", "hlektromagnhtikh", 5, CoursesCategoryEnum.Physics));
-            Courses.Add(new Course("111", "Math I", 5, CoursesCategoryEnum.Mathematics));
-
-            //Students
-            Students.Add(new Student("Foteini","Lempesi",26,"123"));
-            Students.Add(new Student("Anna", "Papa", 23, "124"));
-
-            //Professors
-            Professors.Add(new Professor("maria","Papadopouloy",30,"Assistant"));
-            Professors.Add(new Professor("Fotis", "Chrisoulas", 35, "Assistant"));
-
-        }
+       
 
     }
 
