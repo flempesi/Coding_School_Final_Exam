@@ -58,7 +58,7 @@ namespace WindowsFormsApp1.WUI {
             this.ctrlDate.Name = "ctrlDate";
             this.ctrlDate.Size = new System.Drawing.Size(337, 26);
             this.ctrlDate.TabIndex = 22;
-            this.ctrlDate.Value = new System.DateTime(2021, 7, 9, 21, 45, 43, 0);
+            this.ctrlDate.Value = new System.DateTime(2021, 7, 12, 0, 0, 0, 0);
             // 
             // ctrlTime
             // 
