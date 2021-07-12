@@ -9,8 +9,6 @@ using WindowsFormsApp1.Impl;
 using WindowsFormsApp1.Storages;
 
 namespace WindowsFormsApp1.Methods {
-
-    
     class CourseSchedulerDataMethods {
 
         private CourseSchedulerDGVMethods _CourseSchedulerDVGMethods = new CourseSchedulerDGVMethods();
@@ -30,9 +28,7 @@ namespace WindowsFormsApp1.Methods {
 
                     SaveChanges(newUniversity);
                 }
-
             }
-
         }
         public void SaveButtonActions(DataGridView dGVSchedule, Form form, bool hasDeletedRecords, University newUniversity) {
 
@@ -47,29 +43,26 @@ namespace WindowsFormsApp1.Methods {
                 MessageBox.Show("Please add a schedule to save it");
             }
         }
-
         public void SaveChanges(University newUniversity) {
             _Storage.NewUniversity = newUniversity;
             _Storage.SerializeToJson();
         }
-
-        public void AddSchedule(DataGridView dGVCourses, DataGridView dGVProfessors, DataGridView dGVSchedule,University newUniversity, DateTimePicker ctrlTime, DateTimePicker ctrlDate, Action<object, DataGridViewCellEventArgs> dataGridViewSchedules_DeleteButton_CellClick) {
+        public void AddSchedule(DataGridView dGVCourses, DataGridView dGVProfessors, DataGridView dGVSchedule, University newUniversity, DateTimePicker ctrlTime, DateTimePicker ctrlDate, Action<object, DataGridViewCellEventArgs> dataGridViewSchedules_DeleteButton_CellClick) {
 
             if (dGVCourses.SelectedRows.Count == 1 && dGVProfessors.SelectedRows.Count == 1) {
                 DataGridViewRow rowCourse = dGVCourses.SelectedRows[0];
                 DataGridViewRow rowProfessor = dGVProfessors.SelectedRows[0];
                 Guid courseID = Guid.Parse(rowCourse.Cells["Id"].Value.ToString());
                 Guid professorID = Guid.Parse(rowProfessor.Cells["Id"].Value.ToString());
-                DateTime dateTimeSchedule = GetDateTime( ctrlTime,  ctrlDate);
+                DateTime dateTimeSchedule = GetDateTime(ctrlTime, ctrlDate);
 
-                if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule, courseID,newUniversity) &&
+                if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule, courseID, newUniversity) &&
                     CheckMaxCoursesForProfessor(professorID, dateTimeSchedule, newUniversity)) {
                     newUniversity.ScheduleList.Add(new Schedule(professorID, courseID, dateTimeSchedule));
                     _CourseSchedulerDVGMethods.RefreshDataGridSchedule(dGVSchedule, newUniversity, dataGridViewSchedules_DeleteButton_CellClick);
                 }
             }
         }
-
         private DateTime GetDateTime(DateTimePicker ctrlTime, DateTimePicker ctrlDate) {
             string timeValue = ctrlTime.Value.ToString("HH:mm:00");
             string dateValue = ctrlDate.Value.ToString("yyyy MM dd");
@@ -86,24 +79,51 @@ namespace WindowsFormsApp1.Methods {
             foreach (var item in proffesorSceduleList) {
 
                 if (item.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
-                    if (item.DateTimeSchedule.Hour == dateTime.Hour) {
-                        MessageBox.Show("You can not add the same professor in the same time of the same date");
-                        return false;
-                    }
+                    int HoursExistingCourse = newUniversity.Courses.Find(x => x.Id == item.CourseID).Hours;
+                    int HoursNewCourse = newUniversity.Courses.Find(x => x.Id == courseid).Hours;
+
                     if (item.CourseID == courseid) {
                         MessageBox.Show("You can not add the same course in the same professor in same date");
                         return false;
-
+                    }
+                    if( !CheckbyHour(dateTime, item, HoursExistingCourse, HoursNewCourse)) {
+                        return false;
                     }
                 }
-
             }
             return true;
+        }
+        private static bool CheckbyHour(DateTime dateTime, Schedule item, int HoursExistingCourse, int HoursNewCourse) {
+            if (item.DateTimeSchedule.Hour == dateTime.Hour) {
+                MessageBox.Show("You can not add the same professor in the same time of the same date");
+                return false;
 
+            }
+            else {//by hours check
+                  //not having already lesson in the time of the new schedule for course
+                  //looking in the existing hours of the existing scheduled course 
+                  //An exei hdh mauhma se kapoio allo ma8hma
+                for (int i = 1; i < HoursExistingCourse; i++) {
+                    if (item.DateTimeSchedule.Hour + i == dateTime.Hour) {
+                        MessageBox.Show("During of existing lesson , cant added new lesson!");
+                        return false;
+                    }
+                }
+                //not having  lesson in the time of the new schedule for course
+                //looking in the new hours of th new course to schedule
+                //An kata ths diarkeias toy neoy ma8hmatos exei allo ma8hma
+                for (int i = 1; i < HoursNewCourse; i++) {
+                    if (item.DateTimeSchedule.Hour == dateTime.Hour + i) {
+                        MessageBox.Show("In the during of the new scheduled course , professor have already lesson!");
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
-        public bool CheckMaxCoursesForProfessor(Guid professorId, DateTime dateTime,University newUniversity) {
-            // A PROFESSOR CANNOT TEACH MORE THAN 4 COURSES PER DAY AND  40(20 right) COURSES PER WEEK
+        public bool CheckMaxCoursesForProfessor(Guid professorId, DateTime dateTime, University newUniversity) {
+            // A PROFESSOR CANNOT TEACH MORE THAN 4 COURSES PER DAY AND   20  COURSES PER WEEK
             List<Schedule> proffesorSceduleList = new List<Schedule>();
             proffesorSceduleList = newUniversity.ScheduleList.FindAll(x => x.ProfessorID == professorId);
             int coursesPerDay = 0;
@@ -115,12 +135,6 @@ namespace WindowsFormsApp1.Methods {
                 if (item.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
                     coursesPerDay++;
                 }
-                //if (item.DateTimeSchedule.WeekOfYear == dateTime.Date.ToString("MM")) {
-                //    coursesPerMonth++;
-                //}
-
-
-                //var firstDayWeek = cul.Calendar.GetWeekOfYear(item.DateTimeSchedule, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
                 int weekNumberOfesheduledCourse = culture.Calendar.GetWeekOfYear(item.DateTimeSchedule, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
 
                 int weekNumberOfCourse = culture.Calendar.GetWeekOfYear(dateTime.Date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
@@ -128,13 +142,13 @@ namespace WindowsFormsApp1.Methods {
                     coursesPerWeek++;
 
                 }
-                if (coursesPerDay > 4) {
-                    MessageBox.Show("The professor cant teach more than 4 courses per day!");
-                    return false;
-                }
-                else if (coursesPerWeek > 20) {
-                    MessageBox.Show("The professor cant teach more than 20 courses per week!");
-                }
+            }
+            if (coursesPerDay >= 4) {
+                MessageBox.Show("The professor cant teach more than 4 courses per day!");
+                return false;
+            }
+            if (coursesPerWeek >= 20) {
+                MessageBox.Show("The professor cant teach more than 20 courses per week!");
             }
             return true;
         }
