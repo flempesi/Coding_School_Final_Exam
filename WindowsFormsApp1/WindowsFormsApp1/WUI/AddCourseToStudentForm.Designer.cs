@@ -45,9 +45,9 @@ namespace WindowsFormsApp1.WUI {
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.Location = new System.Drawing.Point(21, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 20);
+            this.label1.Size = new System.Drawing.Size(217, 20);
             this.label1.TabIndex = 27;
-            this.label1.Text = "Select a course :";
+            this.label1.Text = "Select a scheduled course :";
             // 
             // dGVCoursesForStudents
             // 

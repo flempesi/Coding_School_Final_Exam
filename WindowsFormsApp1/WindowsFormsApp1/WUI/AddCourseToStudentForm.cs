@@ -113,9 +113,13 @@ namespace WindowsFormsApp1.WUI {
         public void SetRowsDataGridViewCourses(List<Course> Courses, DataGridView dataGridView) {
             string[] row;
 
-            foreach (var item in Courses) {
-                row = (new string[] { item.Id.ToString(), item.Code, item.Subject, item.Hours.ToString() , item.Category.ToString()});
-                dataGridView.Rows.Add(row);
+            foreach (var course in Courses) {
+                Schedule courseScheduled = NewUniversity.ScheduleList.FirstOrDefault(x => x.CourseID == course.Id);
+                if (courseScheduled != null) {
+                    row = (new string[] { course.Id.ToString(), course.Code, course.Subject, course.Hours.ToString(), course.Category.ToString() });
+                    dataGridView.Rows.Add(row);
+                }
+               
             }
         }
 
