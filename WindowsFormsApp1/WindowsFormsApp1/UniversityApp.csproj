@@ -68,6 +68,8 @@
     <Compile Include="Impl\Professor.cs" />
     <Compile Include="Impl\Schedule.cs" />
     <Compile Include="Impl\Student.cs" />
+    <Compile Include="Methods\AddCourseToStudentDataMethods.cs" />
+    <Compile Include="Methods\AddCourseToStudentDGVMethods.cs" />
     <Compile Include="Methods\CommonDGVMethods.cs" />
     <Compile Include="Methods\CourseSchedulerDataMethods.cs" />
     <Compile Include="Methods\CourseSchedulerDGVMethods.cs" />
