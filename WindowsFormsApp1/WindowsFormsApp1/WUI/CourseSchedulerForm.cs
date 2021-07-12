@@ -15,7 +15,7 @@ namespace WindowsFormsApp1.WUI {
     public partial class CourseSchedulerForm : Form {
 
         public University NewUniversity = new University();
-        private List<Schedule> ScheduleList  = new List<Schedule>();
+        private List<Schedule> ScheduleList = new List<Schedule>();
 
         private Storage Storage = new Storage();
 
@@ -39,7 +39,7 @@ namespace WindowsFormsApp1.WUI {
             AddSchedule();
         }
         private void OnLoad() {
-            
+
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximumSize = this.Size;
             this.MinimumSize = this.Size;
@@ -47,7 +47,7 @@ namespace WindowsFormsApp1.WUI {
             ctrlTime.ShowUpDown = true;
             LoadGridViewCourses();
             LoadGridViewProfessors();
-            
+
             ScheduleList = NewUniversity.ScheduleList;
             RefreshDataGridSchedule();
         }
@@ -83,7 +83,7 @@ namespace WindowsFormsApp1.WUI {
             string[] row;
 
             foreach (var item in professors) {
-                row = (new string[] { item.Id.ToString(), item.Name, item.Surname});
+                row = (new string[] { item.Id.ToString(), item.Name, item.Surname });
                 dataGridView.Rows.Add(row);
             }
         }
@@ -128,9 +128,9 @@ namespace WindowsFormsApp1.WUI {
             SetDataGridViewProperties(dGVSchedule);
             dGVSchedule.Rows.Clear();
 
-            List<string> ColumnsNames = new List<string> { "Id","Subject", "Professor Name", "Professor Surname", "Date" };
-            List<string> HideColumnsNames = new List<string> { "Id"};
-            MakeColumnsDataGridView(dGVSchedule, true,6, ColumnsNames, HideColumnsNames);
+            List<string> ColumnsNames = new List<string> { "Id", "Subject", "Professor Name", "Professor Surname", "Date" };
+            List<string> HideColumnsNames = new List<string> { "Id" };
+            MakeColumnsDataGridView(dGVSchedule, true, 6, ColumnsNames, HideColumnsNames);
             SetRowsDataGridView();
         }
 
@@ -203,11 +203,12 @@ namespace WindowsFormsApp1.WUI {
 
         }
         private void SaveButtonActions() {
-            
-            if (dGVSchedule.Rows.Count > 1 ) {
+
+            if (dGVSchedule.Rows.Count > 1) {
                 SaveChanges();
                 Close();
-            }else if ( HasDeletedRecords == true) {
+            }
+            else if (HasDeletedRecords == true) {
                 Close();
             }
             else {
@@ -219,12 +220,6 @@ namespace WindowsFormsApp1.WUI {
             Storage.NewUniversity = NewUniversity;
             Storage.SerializeToJson();
         }
-
-        public void validate_professorCourse_with_studentCourse() {
-
-            //TODO: ?Not doent need cause it did it logically cause i have two forms
-
-        }
         public bool CheckIfSameProfessorInSameDateTimeHasCourse(Guid professorId, DateTime dateTime, Guid courseid) {
             //  CANNOT ADD SAME   PROFESSOR IN SAME DATE & HOUR
             //cannot add same course in same date
@@ -234,9 +229,11 @@ namespace WindowsFormsApp1.WUI {
 
                 if (item.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
                     if (item.DateTimeSchedule.Hour == dateTime.Hour) {
+                        MessageBox.Show("You can not add the same professor in the same time of the same date");
                         return false;
                     }
-                    else if (item.CourseID == courseid) {
+                    if (item.CourseID == courseid) {
+                        MessageBox.Show("You can not add the same course in the same professor in same date");
                         return false;
 
                     }
@@ -273,8 +270,12 @@ namespace WindowsFormsApp1.WUI {
                     coursesPerWeek++;
 
                 }
-                if (coursesPerDay > 3 || coursesPerWeek > 20) {
+                if (coursesPerDay > 4) {
+                    MessageBox.Show("The professor cant teach more than 4 courses per day!");
                     return false;
+                }
+                else if (coursesPerWeek > 20) {
+                    MessageBox.Show("The professor cant teach more than 20 courses per week!");
                 }
             }
             return true;
