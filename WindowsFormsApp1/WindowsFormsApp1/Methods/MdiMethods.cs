@@ -12,8 +12,9 @@ using WindowsFormsApp1.WUI;
 namespace WindowsFormsApp1.Methods {
     class MdiMethods {
         private Storage _Storage = new Storage();
+        private InsertDataMethod _InsertDataMethod = new InsertDataMethod();
 
-       
+
         public void OpenCourseschedulerForm(Form form, University newUniversity) {
             CourseSchedulerForm courseSchedulerForm = new CourseSchedulerForm();
             courseSchedulerForm.MdiParent = form;
@@ -27,7 +28,7 @@ namespace WindowsFormsApp1.Methods {
             addCourseToStudentForm.Show();
         }
         public void Initialize(University newUniversity) {
-            newUniversity.InsertDataToUniversity();
+            _InsertDataMethod.InsertDataToUniversity(newUniversity);
             _Storage.NewUniversity = newUniversity;
             _Storage.SerializeToJson();
         }
