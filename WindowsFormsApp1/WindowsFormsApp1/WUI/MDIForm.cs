@@ -22,7 +22,7 @@ namespace WindowsFormsApp1.WUI {
             InitializeComponent();
         }
         private void MDIForm_Load(object sender, EventArgs e) {
-           OnLoad();
+            OnLoad();
         }
         private void courseSchedulerToolStripMenuItem_Click(object sender, EventArgs e) {
             _MdiMethods.OpenCourseschedulerForm(this, NewUniversity);
@@ -35,6 +35,7 @@ namespace WindowsFormsApp1.WUI {
             Application.Exit();
         }
         public void OnLoad() {
+            this.WindowState = FormWindowState.Maximized;
             Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.LightGray;
             //_MdiMethods.Initialize(NewUniversity);
             _Storage.DeserializeFromJson();
