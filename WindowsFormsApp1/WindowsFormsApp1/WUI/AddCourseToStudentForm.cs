@@ -250,13 +250,21 @@ namespace WindowsFormsApp1.WUI {
 
             foreach (var scheduleCourse in sceduleListOfCourse) {
                 dateTime = scheduleCourse.DateTimeSchedule;
-
+                Course courseExist = courses.Find(x => x.Id == scheduleCourse.CourseID);
+                
                 foreach (var scheduleStudent in sceduleListOfStudent) {
                     if (scheduleStudent.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
                         if (scheduleStudent.DateTimeSchedule.Hour == dateTime.Hour) {
+                           MessageBox.Show("You can not add in the same student in the same time of the same date  more than one courses");
                             return false;
                         }
-                        if (coursePerDay >= 3) {// EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
+                        if (courseExist != null) {
+                            MessageBox.Show("You can not add the same course in the same student in same date");
+                            return false;
+
+                        }
+                        if (coursePerDay > 3) {// EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
+                            MessageBox.Show("A student cannt attend more than 3 courses a day");
                             return false;
                         }
                         coursePerDay++;
