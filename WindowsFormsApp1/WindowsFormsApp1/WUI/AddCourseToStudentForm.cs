@@ -36,9 +36,6 @@ namespace WindowsFormsApp1.WUI {
         private void btnAdd_Click(object sender, EventArgs e) {
             AddCourse();
         }
-        //private void btnDelete_Click(object sender, EventArgs e) {
-        //    DeleteCourse();
-        //}
         private void OnLoad() {
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximumSize = this.Size;
@@ -47,7 +44,6 @@ namespace WindowsFormsApp1.WUI {
             LoadGridViewCourses();
             LoadGridViewStudents();
 
-            //_StudentsList = new List<Student>();
             _StudentsList = NewUniversity.Students;
             RefreshDataGridScheduleStudents();
         }
@@ -84,13 +80,10 @@ namespace WindowsFormsApp1.WUI {
                 DataGridViewRow rowProfessor = dGVStudents.SelectedRows[0];
                 Guid courseID = Guid.Parse(rowCourse.Cells["id"].Value.ToString());
                 Guid studentID = Guid.Parse(rowProfessor.Cells["id"].Value.ToString());
-                //DateTime dateTimeSchedule = GetDateTime();
-                //Student student= _StudentsList.Find(x => x.Id == studentID);
-                // Course[] courses;
+
                 Course course = _StudentsList.Find(x => x.Id == studentID).Courses.Find(x => x.Id == courseID);
                 if (course == null) {//if dont have already this lesson
-                    if (CheckIfSameStudentInSameDateTimeHasCourse(courseID, studentID)) {//&&
-                                                                                         //    CheckMaxCoursesForProfessor(professorID, dateTimeSchedule)) {
+                    if (CheckIfSameStudentInSameDateTimeHasCourse(courseID, studentID)) {
                         _StudentsList.Find(x => x.Id == studentID).Courses.Add(NewUniversity.Courses.Find(x => x.Id == courseID));
 
                         RefreshDataGridScheduleStudents();
@@ -107,8 +100,8 @@ namespace WindowsFormsApp1.WUI {
         }
         public void MakeColumnsDataGridView() {
             dGVScheduleStudents.ColumnCount = 9;
-            dGVScheduleStudents.ColumnHeadersVisible = true;
-
+           
+            dGVScheduleStudents.Columns[0].Name = "Delete";
             DataGridViewButtonColumn DeleteButton = new DataGridViewButtonColumn();
             DeleteButton.Name = "Delete";
             DeleteButton.Text = "Delete";
@@ -118,28 +111,29 @@ namespace WindowsFormsApp1.WUI {
                 dGVScheduleStudents.CellClick += new DataGridViewCellEventHandler(dGVScheduleStudents_DeleteButton_CellClick);
             }
 
-            dGVScheduleStudents.Columns[1].Name = "StudentId";
-            dGVScheduleStudents.Columns[2].Name = "CourseId";
-            dGVScheduleStudents.Columns[3].Name = "Subject";
-            dGVScheduleStudents.Columns[4].Name = "Professor Name";
-            dGVScheduleStudents.Columns[5].Name = "Professor Surname";
-            dGVScheduleStudents.Columns[6].Name = "Date";
-            dGVScheduleStudents.Columns[7].Name = "Student Name";
-            dGVScheduleStudents.Columns[8].Name = "Student Surname";
 
-            dGVScheduleStudents.Columns["StudentId"].Visible = false;
-            dGVScheduleStudents.Columns["CourseId"].Visible = false;
+            dGVScheduleStudents.Columns[1].Name = "Subject";
+            dGVScheduleStudents.Columns[2].Name = "Professor Name";
+            dGVScheduleStudents.Columns[3].Name = "Professor Surname";
+            dGVScheduleStudents.Columns[4].Name = "Date";
+            dGVScheduleStudents.Columns[5].Name = "Student Name";
+            dGVScheduleStudents.Columns[6].Name = "Student Surname";
+            dGVScheduleStudents.Columns[7].Name = "StudentId";
+            dGVScheduleStudents.Columns[7].Visible = false;
+            dGVScheduleStudents.Columns[8].Name = "CourseId";
+            dGVScheduleStudents.Columns[8].Visible = false;
         }
         private void dGVScheduleStudents_DeleteButton_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.ColumnIndex == dGVScheduleStudents.Columns["Delete"].Index) {
-                //int rowIndex = e.RowIndex;
                 DeleteCourse();
             }
         }
 
         public void SetRowsDataGridView() {
+            
+            //List<string[]> rows = new List<string[]>();
+            string[] row = new string[9];
 
-            List<string[]> rows = new List<string[]>();
             foreach (var student in _StudentsList) {
                 string studentId = student.Id.ToString();
                 string studentName = NewUniversity.Students.Find(x => x.Id == student.Id).Name;
@@ -150,20 +144,21 @@ namespace WindowsFormsApp1.WUI {
                     string courseId = course.Id.ToString();
                     string courseSubject = NewUniversity.Courses.Find(x => x.Id == course.Id).Subject;
 
-                    //Guid scheduleListRowId = NewUniversity.ScheduleList.Find(x => x.CourseID == course.Id).Id;
                     Schedule schedule = NewUniversity.ScheduleList.Find(x => x.CourseID == course.Id);
-                    Guid professorId = NewUniversity.ScheduleList.Find(x => x.CourseID == course.Id).ProfessorID;
-                    string name = NewUniversity.Professors.Find(x => x.Id == professorId).Name;
-                    string surname = NewUniversity.Professors.Find(x => x.Id == professorId).Surname;
-                    string datetime = schedule.DateTimeSchedule.ToString();
+                    if (schedule != null) {
+                        Guid professorId = NewUniversity.ScheduleList.Find(x => x.CourseID == course.Id).ProfessorID;
+                        string name = NewUniversity.Professors.Find(x => x.Id == professorId).Name;
+                        string surname = NewUniversity.Professors.Find(x => x.Id == professorId).Surname;
+                        string datetime = schedule.DateTimeSchedule.ToString();
 
-                    rows.Add(new string[] { studentId, courseId, courseSubject, name, surname, datetime, studentName, studentSurname });
+                        row=(new string[] {"",courseSubject, name, surname, datetime, studentName, studentSurname , studentId, courseId });
+                        dGVScheduleStudents.Rows.Add(row);
+                    }
+                    else {
+                        MessageBox.Show("The course is not scheduled.Please select other");
+                    }
                 }
 
-            }
-
-            foreach (string[] rowArray in rows) {
-                dGVScheduleStudents.Rows.Add(rowArray);
             }
         }
 
@@ -179,11 +174,8 @@ namespace WindowsFormsApp1.WUI {
                 DialogResult result = MessageBox.Show("Are you sure to delete this record ? ", "Delete record", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) {
                     HasDeletedRecords = true;
-
-
                     _StudentsList.Find(x => x.Id == studentID).Courses.Remove(course);
                     RefreshDataGridScheduleStudents();
-
                     SaveChanges();
                 }
 
@@ -203,8 +195,6 @@ namespace WindowsFormsApp1.WUI {
             else {
                 MessageBox.Show("Please Add a course to student to save it");
             }
-
-
 
         }
 
@@ -230,21 +220,16 @@ namespace WindowsFormsApp1.WUI {
 
             foreach (var scheduleCourse in sceduleListOfCourse) {
                 dateTime = scheduleCourse.DateTimeSchedule;
-                //if (item.DateTimeSchedule == dateTime) {
-                //    return false;
-                //}
+
                 foreach (var scheduleStudent in sceduleListOfStudent) {
                     if (scheduleStudent.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
                         if (scheduleStudent.DateTimeSchedule.Hour == dateTime.Hour) {
                             return false;
                         }
-                        //else if (item.CourseID == courseId) {
-                        //    return false;
                         if (coursePerDay >= 3) {// EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
                             return false;
                         }
                         coursePerDay++;
-                        //}
                     }
 
                 }
