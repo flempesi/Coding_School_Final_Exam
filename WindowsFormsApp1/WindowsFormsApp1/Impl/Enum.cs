@@ -9,6 +9,7 @@ namespace WindowsFormsApp1.Impl {
         Physics,
         Mathematics,
         Chemistry,
-        Financial
+        Financial,
+        IT
     }
 }
