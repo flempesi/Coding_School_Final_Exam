@@ -71,7 +71,7 @@ namespace WindowsFormsApp1.Methods {
             string[] row;
 
             foreach (var item in Students) {
-                row = (new string[] { item.Id.ToString(), item.Name, item.Surname, item.RegistrationNumber });
+                row = (new string[] { item.Id.ToString(), item.Name, item.Surname, item.RegistrationNumber.ToString() });
                 dataGridView.Rows.Add(row);
             }
         }
