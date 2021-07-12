@@ -49,14 +49,22 @@ namespace WindowsFormsApp1.WUI {
         }
         public void LoadGridViewCourses() {
             SetDataGridViewProperties(dGVCoursesForStudents);
-            dGVCoursesForStudents.DataSource = NewUniversity.Courses;
-            dGVCoursesForStudents.Columns["Id"].Visible = false;
+            List<string> ColumnsNames = new List<string> { "Id", "Code", "Subject", "Hours","Category" };
+            List<string> HideColumnsNames = new List<string> { "Id" };
+
+            MakeColumnsDataGridView(dGVCoursesForStudents, false, 5, ColumnsNames, HideColumnsNames);
+            SetRowsDataGridViewCourses(NewUniversity.Courses, dGVCoursesForStudents);
+
         }
         public void LoadGridViewStudents() {
             SetDataGridViewProperties(dGVStudents);
-            dGVStudents.DataSource = NewUniversity.Students;
-            dGVStudents.Columns["Id"].Visible = false;
-            dGVStudents.Columns["Age"].Visible = false;
+
+            List<string> ColumnsNames = new List<string> { "Id", "Name", "Surname", "RegistrationNumber" };
+            List<string> HideColumnsNames = new List<string> { "Id" };
+
+            MakeColumnsDataGridView(dGVStudents, false, 4, ColumnsNames, HideColumnsNames);
+            SetRowsDataGridViewStudents(NewUniversity.Students, dGVStudents);
+
 
         }
 
@@ -95,33 +103,47 @@ namespace WindowsFormsApp1.WUI {
         public void RefreshDataGridScheduleStudents() {
             SetDataGridViewProperties(dGVScheduleStudents);
             dGVScheduleStudents.Rows.Clear();
-            MakeColumnsDataGridView();
+            List<string> ColumnsNames = new List<string> { "Subject", "Professor Name", "Professor Surname", "Date", "Student Name", "Student Surname", "StudentId", "CourseId" };
+            List<string> HideColumnsNames = new List<string> { "StudentId", "CourseId" };
+
+            MakeColumnsDataGridView(dGVScheduleStudents, true, 9, ColumnsNames, HideColumnsNames);
             SetRowsDataGridView();
         }
-        public void MakeColumnsDataGridView() {
-            dGVScheduleStudents.ColumnCount = 9;
-           
-            dGVScheduleStudents.Columns[0].Name = "Delete";
-            DataGridViewButtonColumn DeleteButton = new DataGridViewButtonColumn();
-            DeleteButton.Name = "Delete";
-            DeleteButton.Text = "Delete";
-            DeleteButton.UseColumnTextForButtonValue = true;
-            if (dGVScheduleStudents.Columns["Delete"] == null) {
-                dGVScheduleStudents.Columns.Insert(0, DeleteButton);
-                dGVScheduleStudents.CellClick += new DataGridViewCellEventHandler(dGVScheduleStudents_DeleteButton_CellClick);
+        
+        public void SetRowsDataGridViewCourses(List<Course> Courses, DataGridView dataGridView) {
+            string[] row;
+
+            foreach (var item in Courses) {
+                row = (new string[] { item.Id.ToString(), item.Code, item.Subject, item.Hours.ToString() , item.Category.ToString()});
+                dataGridView.Rows.Add(row);
+            }
+        }
+
+        public void MakeColumnsDataGridView(DataGridView dataGridView, bool hasDeleteButton, int columnsCount, List<string> columnsNames, List<string> hideColumnsNames) {
+            dataGridView.ColumnCount = columnsCount;
+            int i = 0;
+            if (hasDeleteButton == true) {
+                DataGridViewButtonColumn DeleteButton = new DataGridViewButtonColumn();
+                DeleteButton.Name = "Delete";
+                DeleteButton.Text = "Delete";
+                DeleteButton.UseColumnTextForButtonValue = true;
+                if (dataGridView.Columns["Delete"] == null) {
+                    dataGridView.Columns.Insert(0, DeleteButton);
+                    dataGridView.CellClick += new DataGridViewCellEventHandler(dGVScheduleStudents_DeleteButton_CellClick);
+                }
+                i++;
+            }
+            foreach (string name in columnsNames) {
+                dataGridView.Columns[i].Name = name;
+                i++;
+            }
+            foreach (string name in hideColumnsNames) {
+                dataGridView.Columns[name].Visible = false;
             }
 
-
-            dGVScheduleStudents.Columns[1].Name = "Subject";
-            dGVScheduleStudents.Columns[2].Name = "Professor Name";
-            dGVScheduleStudents.Columns[3].Name = "Professor Surname";
-            dGVScheduleStudents.Columns[4].Name = "Date";
-            dGVScheduleStudents.Columns[5].Name = "Student Name";
-            dGVScheduleStudents.Columns[6].Name = "Student Surname";
-            dGVScheduleStudents.Columns[7].Name = "StudentId";
-            dGVScheduleStudents.Columns[7].Visible = false;
-            dGVScheduleStudents.Columns[8].Name = "CourseId";
-            dGVScheduleStudents.Columns[8].Visible = false;
+            if (dataGridView.Columns.Contains("") == true) {
+                dataGridView.Columns.Remove("");
+            }
         }
         private void dGVScheduleStudents_DeleteButton_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.ColumnIndex == dGVScheduleStudents.Columns["Delete"].Index) {
@@ -129,9 +151,15 @@ namespace WindowsFormsApp1.WUI {
             }
         }
 
+        public void  SetRowsDataGridViewStudents(List<Student> Students, DataGridView dataGridView) {
+           string[] row;
+
+            foreach (var item in Students) {
+                row = (new string[] { item.Id.ToString(), item.Name, item.Surname, item.RegistrationNumber });
+                dataGridView.Rows.Add(row);
+            }
+        }
         public void SetRowsDataGridView() {
-            
-            //List<string[]> rows = new List<string[]>();
             string[] row = new string[9];
 
             foreach (var student in _StudentsList) {
@@ -151,12 +179,10 @@ namespace WindowsFormsApp1.WUI {
                         string surname = NewUniversity.Professors.Find(x => x.Id == professorId).Surname;
                         string datetime = schedule.DateTimeSchedule.ToString();
 
-                        row=(new string[] {"",courseSubject, name, surname, datetime, studentName, studentSurname , studentId, courseId });
+                        row = (new string[] { "", courseSubject, name, surname, datetime, studentName, studentSurname, studentId, courseId });
                         dGVScheduleStudents.Rows.Add(row);
                     }
-                    else {
-                        MessageBox.Show("The course is not scheduled.Please select other");
-                    }
+
                 }
 
             }
