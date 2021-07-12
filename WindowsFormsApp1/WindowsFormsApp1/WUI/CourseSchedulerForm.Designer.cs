@@ -24,32 +24,32 @@ namespace WindowsFormsApp1.WUI {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.dataGridViewCourses = new System.Windows.Forms.DataGridView();
+            this.dGVCourses = new System.Windows.Forms.DataGridView();
             this.ctrlDate = new System.Windows.Forms.DateTimePicker();
             this.ctrlTime = new System.Windows.Forms.DateTimePicker();
             this.btnAdd = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.dataGridViewProfessors = new System.Windows.Forms.DataGridView();
-            this.dataGridViewSchedules = new System.Windows.Forms.DataGridView();
+            this.dGVProfessors = new System.Windows.Forms.DataGridView();
+            this.dGVSchedule = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCourses)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProfessors)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSchedules)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVCourses)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVProfessors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVSchedule)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridViewCourses
+            // dGVCourses
             // 
-            this.dataGridViewCourses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCourses.Location = new System.Drawing.Point(54, 63);
-            this.dataGridViewCourses.Name = "dataGridViewCourses";
-            this.dataGridViewCourses.RowHeadersWidth = 51;
-            this.dataGridViewCourses.RowTemplate.Height = 24;
-            this.dataGridViewCourses.Size = new System.Drawing.Size(612, 150);
-            this.dataGridViewCourses.TabIndex = 21;
+            this.dGVCourses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVCourses.Location = new System.Drawing.Point(54, 63);
+            this.dGVCourses.Name = "dGVCourses";
+            this.dGVCourses.RowHeadersWidth = 51;
+            this.dGVCourses.RowTemplate.Height = 24;
+            this.dGVCourses.Size = new System.Drawing.Size(612, 150);
+            this.dGVCourses.TabIndex = 21;
             // 
             // ctrlDate
             // 
@@ -113,25 +113,25 @@ namespace WindowsFormsApp1.WUI {
             this.label3.TabIndex = 27;
             this.label3.Text = "And select a date and time :";
             // 
-            // dataGridViewProfessors
+            // dGVProfessors
             // 
-            this.dataGridViewProfessors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewProfessors.Location = new System.Drawing.Point(713, 63);
-            this.dataGridViewProfessors.Name = "dataGridViewProfessors";
-            this.dataGridViewProfessors.RowHeadersWidth = 51;
-            this.dataGridViewProfessors.RowTemplate.Height = 24;
-            this.dataGridViewProfessors.Size = new System.Drawing.Size(312, 150);
-            this.dataGridViewProfessors.TabIndex = 28;
+            this.dGVProfessors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVProfessors.Location = new System.Drawing.Point(713, 63);
+            this.dGVProfessors.Name = "dGVProfessors";
+            this.dGVProfessors.RowHeadersWidth = 51;
+            this.dGVProfessors.RowTemplate.Height = 24;
+            this.dGVProfessors.Size = new System.Drawing.Size(312, 150);
+            this.dGVProfessors.TabIndex = 28;
             // 
-            // dataGridViewSchedules
+            // dGVSchedule
             // 
-            this.dataGridViewSchedules.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewSchedules.Location = new System.Drawing.Point(54, 426);
-            this.dataGridViewSchedules.Name = "dataGridViewSchedules";
-            this.dataGridViewSchedules.RowHeadersWidth = 51;
-            this.dataGridViewSchedules.RowTemplate.Height = 24;
-            this.dataGridViewSchedules.Size = new System.Drawing.Size(971, 150);
-            this.dataGridViewSchedules.TabIndex = 29;
+            this.dGVSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVSchedule.Location = new System.Drawing.Point(54, 426);
+            this.dGVSchedule.Name = "dGVSchedule";
+            this.dGVSchedule.RowHeadersWidth = 51;
+            this.dGVSchedule.RowTemplate.Height = 24;
+            this.dGVSchedule.Size = new System.Drawing.Size(971, 150);
+            this.dGVSchedule.TabIndex = 29;
             // 
             // label4
             // 
@@ -177,21 +177,21 @@ namespace WindowsFormsApp1.WUI {
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.dataGridViewSchedules);
-            this.Controls.Add(this.dataGridViewProfessors);
+            this.Controls.Add(this.dGVSchedule);
+            this.Controls.Add(this.dGVProfessors);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.ctrlTime);
             this.Controls.Add(this.ctrlDate);
-            this.Controls.Add(this.dataGridViewCourses);
+            this.Controls.Add(this.dGVCourses);
             this.Name = "CourseSchedulerForm";
             this.Text = "Course Scheduler ";
             this.Load += new System.EventHandler(this.CourseSchedulerForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCourses)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProfessors)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSchedules)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVCourses)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVProfessors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVSchedule)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,15 +199,15 @@ namespace WindowsFormsApp1.WUI {
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridViewCourses;
+        private System.Windows.Forms.DataGridView dGVCourses;
         private System.Windows.Forms.DateTimePicker ctrlDate;
         private System.Windows.Forms.DateTimePicker ctrlTime;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridViewProfessors;
-        private System.Windows.Forms.DataGridView dataGridViewSchedules;
+        private System.Windows.Forms.DataGridView dGVProfessors;
+        private System.Windows.Forms.DataGridView dGVSchedule;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
