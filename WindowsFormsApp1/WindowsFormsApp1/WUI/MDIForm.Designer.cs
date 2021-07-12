@@ -86,7 +86,7 @@ namespace WindowsFormsApp1.WUI {
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MDIForm";
-            this.Text = "University Courses Managment";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.MDIForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
