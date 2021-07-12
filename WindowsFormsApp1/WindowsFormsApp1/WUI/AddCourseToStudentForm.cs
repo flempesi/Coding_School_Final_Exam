@@ -47,5 +47,10 @@ namespace WindowsFormsApp1.WUI {
 
             }
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e) {
+            _AddCourseToStudentDGVMethods.RefreshData(dGVStudents, dGVCoursesForStudents, NewUniversity);
+
+        }
     }
 }

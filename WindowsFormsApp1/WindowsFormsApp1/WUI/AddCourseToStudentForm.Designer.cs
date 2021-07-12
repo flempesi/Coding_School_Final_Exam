@@ -34,6 +34,7 @@ namespace WindowsFormsApp1.WUI {
             this.btnSave = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.dGVScheduleStudents = new System.Windows.Forms.DataGridView();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVCoursesForStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVStudents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVScheduleStudents)).BeginInit();
@@ -146,12 +147,26 @@ namespace WindowsFormsApp1.WUI {
             this.dGVScheduleStudents.Size = new System.Drawing.Size(971, 150);
             this.dGVScheduleStudents.TabIndex = 34;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.SteelBlue;
+            this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnRefresh.ForeColor = System.Drawing.Color.White;
+            this.btnRefresh.Location = new System.Drawing.Point(505, 15);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(131, 34);
+            this.btnRefresh.TabIndex = 38;
+            this.btnRefresh.Text = "Refresh Data";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // AddCourseToStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1084, 706);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label4);
@@ -183,5 +198,6 @@ namespace WindowsFormsApp1.WUI {
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridView dGVScheduleStudents;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

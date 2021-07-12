@@ -10,6 +10,8 @@ using WindowsFormsApp1.Impl;
 namespace WindowsFormsApp1.Methods {
     class AddCourseToStudentDGVMethods {
         private CommonDGVMethods _CommonDGVMethods = new CommonDGVMethods();
+
+        #region loadsForms
         public void OnLoad(Form form, DataGridView dGVCoursesForStudents, DataGridView dGVStudents, DataGridView dGVScheduleStudents,University newUniversity, Action<object, DataGridViewCellEventArgs> DeleteButton_CellClick) {
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.MaximumSize = form.Size;
@@ -21,16 +23,15 @@ namespace WindowsFormsApp1.Methods {
         }
         public void LoadGridViewCourses(DataGridView dGVCoursesForStudents, University newUniversity) {
             _CommonDGVMethods.SetDataGridViewProperties(dGVCoursesForStudents);
-            List<string> ColumnsNames = new List<string> { "Id", "Code", "Subject", "Hours", "Category" };
+            List<string> ColumnsNames = new List<string> { "Id", "Code", "Subject", "Hours", "Category","DateTime" };
             List<string> HideColumnsNames = new List<string> { "Id" };
 
-            _CommonDGVMethods.MakeColumnsDataGridView(dGVCoursesForStudents, false, 5, ColumnsNames, HideColumnsNames,null);
+            _CommonDGVMethods.MakeColumnsDataGridView(dGVCoursesForStudents, false, 6, ColumnsNames, HideColumnsNames,null);
             SetRowsDataGridViewCourses(newUniversity.Courses, dGVCoursesForStudents, newUniversity);
 
         }
         public void LoadGridViewStudents(DataGridView dGVStudents, University newUniversity) {
             _CommonDGVMethods.SetDataGridViewProperties(dGVStudents);
-
             List<string> ColumnsNames = new List<string> { "Id", "Name", "Surname", "RegistrationNumber" };
             List<string> HideColumnsNames = new List<string> { "Id" };
 
@@ -38,7 +39,16 @@ namespace WindowsFormsApp1.Methods {
             SetRowsDataGridViewStudents(newUniversity.Students, dGVStudents);
 
         }
+        #endregion
 
+        #region refresh
+         public void RefreshData(DataGridView dGVStudents, DataGridView dGVCoursesForStudents , University newUniversity) {
+            dGVCoursesForStudents.Rows.Clear();
+            LoadGridViewCourses(dGVCoursesForStudents, newUniversity);
+            dGVStudents.Rows.Clear();
+            LoadGridViewStudents(dGVStudents, newUniversity);
+
+        }
         public void RefreshDataGridScheduleStudents(DataGridView dGVScheduleStudents, University newUniversity, Action<object, DataGridViewCellEventArgs> DeleteButton_CellClick) {
             _CommonDGVMethods.SetDataGridViewProperties(dGVScheduleStudents);
             dGVScheduleStudents.Rows.Clear();
@@ -50,6 +60,8 @@ namespace WindowsFormsApp1.Methods {
 
             SetRowsDataGridView(newUniversity, dGVScheduleStudents);
         }
+        #endregion
+        #region setRowsOfGrid
         public void SetRowsDataGridViewStudents(List<Student> Students, DataGridView dataGridView) {
             string[] row;
 
@@ -93,11 +105,12 @@ namespace WindowsFormsApp1.Methods {
             foreach (var course in Courses) {
                 Schedule courseScheduled = newUniversity.ScheduleList.FirstOrDefault(x => x.CourseID == course.Id);
                 if (courseScheduled != null) {
-                    row = (new string[] { course.Id.ToString(), course.Code, course.Subject, course.Hours.ToString(), course.Category.ToString() });
+                    row = (new string[] { course.Id.ToString(), course.Code, course.Subject, course.Hours.ToString(), course.Category.ToString(), courseScheduled.DateTimeSchedule.ToString() });
                     dataGridView.Rows.Add(row);
                 }
 
             }
         }
+        #endregion
     }
 }
