@@ -160,33 +160,7 @@ namespace WindowsFormsApp1.WUI {
                 dataGridView.Columns.Remove("");
             }
         }
-        //public void MakeColumnsDataGridView() {
 
-        //    dGVSchedule.ColumnCount = 6;
-
-        //    DataGridViewButtonColumn DeleteButton = new DataGridViewButtonColumn();
-        //    DeleteButton.Name = "Delete";
-        //    DeleteButton.Text = "Delete";
-        //    DeleteButton.UseColumnTextForButtonValue = true;
-        //    if (dGVSchedule.Columns["Delete"] == null) {
-        //        dGVSchedule.Columns.Insert(0, DeleteButton);
-        //        dGVSchedule.CellClick += new DataGridViewCellEventHandler(dataGridViewSchedules_DeleteButton_CellClick);
-        //   }
-           
-
-        //    dGVSchedule.Columns[1].Name = "Id";
-        //    dGVSchedule.Columns[2].Name = "Subject";
-        //    dGVSchedule.Columns[3].Name = "Professor Name";
-        //    dGVSchedule.Columns[4].Name = "Professor Surname";
-        //    dGVSchedule.Columns[5].Name = "Date";
-
-        //    dGVSchedule.Columns[1].Visible = false;
-
-        //    if (dGVSchedule.Columns.Contains("")==true) {
-        //        dGVSchedule.Columns.Remove("");
-        //    }
-           
-        //}
         private void dataGridViewSchedules_DeleteButton_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.ColumnIndex == dGVSchedule.Columns["Delete"].Index) {
                 DeleteSchedule();
