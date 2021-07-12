@@ -36,7 +36,7 @@ namespace WindowsFormsApp1.WUI {
         }
         public void OnLoad() {
             Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.LightGray;
-            //_MdiMethods.Initialize(newUniversity);
+            //_MdiMethods.Initialize(NewUniversity);
             _Storage.DeserializeFromJson();
             NewUniversity = _Storage.NewUniversity;
         }
