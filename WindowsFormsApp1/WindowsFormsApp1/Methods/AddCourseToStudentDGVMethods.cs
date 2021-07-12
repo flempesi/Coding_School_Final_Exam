@@ -17,8 +17,7 @@ namespace WindowsFormsApp1.Methods {
             LoadGridViewCourses(dGVCoursesForStudents, newUniversity);
             LoadGridViewStudents(dGVStudents, newUniversity);
 
-            RefreshDataGridScheduleStudents( dGVScheduleStudents, newUniversity , DeleteButton_CellClick);
-            
+            RefreshDataGridScheduleStudents( dGVScheduleStudents, newUniversity , DeleteButton_CellClick);         
         }
         public void LoadGridViewCourses(DataGridView dGVCoursesForStudents, University newUniversity) {
             _CommonDGVMethods.SetDataGridViewProperties(dGVCoursesForStudents);
@@ -38,22 +37,7 @@ namespace WindowsFormsApp1.Methods {
             _CommonDGVMethods.MakeColumnsDataGridView(dGVStudents, false, 4, ColumnsNames, HideColumnsNames,null);
             SetRowsDataGridViewStudents(newUniversity.Students, dGVStudents);
 
-
         }
-
-        //public void SetDataGridViewProperties(DataGridView dataGridView) {
-        //    dataGridView.MultiSelect = false;
-        //    dataGridView.AllowUserToAddRows = false;
-        //    dataGridView.AllowUserToResizeRows = false;
-        //    dataGridView.RowHeadersVisible = false;
-        //    dataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSteelBlue;
-        //    dataGridView.EnableHeadersVisualStyles = false;
-        //    dataGridView.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
-        //    dataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
-        //    dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        //    dataGridView.ReadOnly = true;
-        //    dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        //}
 
         public void RefreshDataGridScheduleStudents(DataGridView dGVScheduleStudents, University newUniversity, Action<object, DataGridViewCellEventArgs> DeleteButton_CellClick) {
             _CommonDGVMethods.SetDataGridViewProperties(dGVScheduleStudents);
@@ -62,7 +46,6 @@ namespace WindowsFormsApp1.Methods {
             List<string> HideColumnsNames = new List<string> { "StudentId", "CourseId" };
 
             _CommonDGVMethods.MakeColumnsDataGridView(dGVScheduleStudents, true, 9, ColumnsNames, HideColumnsNames, DeleteButton_CellClick);
-            //dGVScheduleStudents_DeleteButton_CellClick
 
 
             SetRowsDataGridView(newUniversity, dGVScheduleStudents);
@@ -116,32 +99,5 @@ namespace WindowsFormsApp1.Methods {
 
             }
         }
-
-        //public void MakeColumnsDataGridView(DataGridView dataGridView, bool hasDeleteButton, int columnsCount, List<string> columnsNames, List<string> hideColumnsNames,) {
-        //    dataGridView.ColumnCount = columnsCount;
-        //    int i = 0;
-        //    if (hasDeleteButton == true) {
-        //        DataGridViewButtonColumn DeleteButton = new DataGridViewButtonColumn();
-        //        DeleteButton.Name = "Delete";
-        //        DeleteButton.Text = "Delete";
-        //        DeleteButton.UseColumnTextForButtonValue = true;
-        //        if (dataGridView.Columns["Delete"] == null) {
-        //            dataGridView.Columns.Insert(0, DeleteButton);
-        //            dataGridView.CellClick += new DataGridViewCellEventHandler(dGVScheduleStudents_DeleteButton_CellClick);
-        //        }
-        //        i++;
-        //    }
-        //    foreach (string name in columnsNames) {
-        //        dataGridView.Columns[i].Name = name;
-        //        i++;
-        //    }
-        //    foreach (string name in hideColumnsNames) {
-        //        dataGridView.Columns[name].Visible = false;
-        //    }
-
-        //    if (dataGridView.Columns.Contains("") == true) {
-        //        dataGridView.Columns.Remove("");
-        //    }
-        //}
     }
 }
