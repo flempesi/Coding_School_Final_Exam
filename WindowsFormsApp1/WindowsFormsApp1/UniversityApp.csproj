@@ -73,6 +73,7 @@
     <Compile Include="Methods\CommonDGVMethods.cs" />
     <Compile Include="Methods\CourseSchedulerDataMethods.cs" />
     <Compile Include="Methods\CourseSchedulerDGVMethods.cs" />
+    <Compile Include="Methods\MdiMethods.cs" />
     <Compile Include="Storages\Storage.cs" />
     <Compile Include="WUI\AddCourseToStudentForm.cs">
       <SubType>Form</SubType>
