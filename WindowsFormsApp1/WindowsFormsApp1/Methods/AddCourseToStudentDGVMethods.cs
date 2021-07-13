@@ -12,21 +12,21 @@ namespace WindowsFormsApp1.Methods {
         private CommonDGVMethods _CommonDGVMethods = new CommonDGVMethods();
 
         #region loadsForms
-        public void OnLoad(Form form, DataGridView dGVCoursesForStudents, DataGridView dGVStudents, DataGridView dGVScheduleStudents,University newUniversity, Action<object, DataGridViewCellEventArgs> DeleteButton_CellClick) {
+        public void OnLoad(Form form, DataGridView dGVCoursesForStudents, DataGridView dGVStudents, DataGridView dGVScheduleStudents, University newUniversity, Action<object, DataGridViewCellEventArgs> DeleteButton_CellClick) {
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.MaximumSize = form.Size;
             form.MinimumSize = form.Size;
             LoadGridViewCourses(dGVCoursesForStudents, newUniversity);
             LoadGridViewStudents(dGVStudents, newUniversity);
 
-            RefreshDataGridScheduleStudents( dGVScheduleStudents, newUniversity , DeleteButton_CellClick);         
+            RefreshDataGridScheduleStudents(dGVScheduleStudents, newUniversity, DeleteButton_CellClick);
         }
         public void LoadGridViewCourses(DataGridView dGVCoursesForStudents, University newUniversity) {
             _CommonDGVMethods.SetDataGridViewProperties(dGVCoursesForStudents);
-            List<string> ColumnsNames = new List<string> { "Id", "Code", "Subject", "Hours", "Category","DateTime" };
+            List<string> ColumnsNames = new List<string> { "Id", "Code", "Subject", "Hours", "Category", "DateTime", "Professor Name", "Professor Surname" };
             List<string> HideColumnsNames = new List<string> { "Id" };
 
-            _CommonDGVMethods.MakeColumnsDataGridView(dGVCoursesForStudents, false, 6, ColumnsNames, HideColumnsNames,null);
+            _CommonDGVMethods.MakeColumnsDataGridView(dGVCoursesForStudents, false, 8, ColumnsNames, HideColumnsNames, null);
             SetRowsDataGridViewCourses(newUniversity.Courses, dGVCoursesForStudents, newUniversity);
 
         }
@@ -35,14 +35,14 @@ namespace WindowsFormsApp1.Methods {
             List<string> ColumnsNames = new List<string> { "Id", "Name", "Surname", "RegistrationNumber" };
             List<string> HideColumnsNames = new List<string> { "Id" };
 
-            _CommonDGVMethods.MakeColumnsDataGridView(dGVStudents, false, 4, ColumnsNames, HideColumnsNames,null);
+            _CommonDGVMethods.MakeColumnsDataGridView(dGVStudents, false, 4, ColumnsNames, HideColumnsNames, null);
             SetRowsDataGridViewStudents(newUniversity.Students, dGVStudents);
 
         }
         #endregion
 
         #region refresh
-         public void RefreshData(DataGridView dGVStudents, DataGridView dGVCoursesForStudents , University newUniversity) {
+        public void RefreshData(DataGridView dGVStudents, DataGridView dGVCoursesForStudents, University newUniversity) {
             dGVCoursesForStudents.Rows.Clear();
             LoadGridViewCourses(dGVCoursesForStudents, newUniversity);
             dGVStudents.Rows.Clear();
@@ -103,13 +103,13 @@ namespace WindowsFormsApp1.Methods {
             string[] row;
 
             foreach (var course in Courses) {
-                Schedule courseScheduled = newUniversity.ScheduleList.FirstOrDefault(x => x.CourseID == course.Id);
+                Schedule courseScheduled = newUniversity.ScheduleList.Find(x => x.CourseID == course.Id);
                 if (courseScheduled != null) {
-                    row = (new string[] { course.Id.ToString(), course.Code, course.Subject, course.Hours.ToString(), course.Category.ToString(), courseScheduled.DateTimeSchedule.ToString() });
+                    row = (new string[] { course.Id.ToString(), course.Code, course.Subject, course.Hours.ToString(), course.Category.ToString(), courseScheduled.DateTimeSchedule.ToString(), newUniversity.Professors.Find(x => x.Id == courseScheduled.ProfessorID).Name, newUniversity.Professors.Find(x => x.Id == courseScheduled.ProfessorID).Surname });
                     dataGridView.Rows.Add(row);
                 }
-
             }
+
         }
         #endregion
     }
