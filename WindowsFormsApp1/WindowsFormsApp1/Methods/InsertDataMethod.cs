@@ -98,17 +98,17 @@ namespace WindowsFormsApp1.Methods {
             university.Students.Add(new Student("Kenneth", "Robertson", 20, 108));
             university.Students.Add(new Student("Angela", "Salas", 18, 109));
             university.Students.Add(new Student("Ocean", "Kelly", 21, 110));
-            university.Students.Add(new Student("Holmes", "Haley", 19, 110));
-            university.Students.Add(new Student("Brittany", "Lang", 22, 111));
-            university.Students.Add(new Student("Timothy", "Calhoun", 21, 112));
-            university.Students.Add(new Student("Carlos", "Ashley", 18, 113));
-            university.Students.Add(new Student("Ivan", "Bean", 20, 114));
-            university.Students.Add(new Student("Jerry", "Quinn", 21, 115));
-            university.Students.Add(new Student("Wylie", "Benton", 31, 116));
-            university.Students.Add(new Student("Gemma", "Hobbs", 19, 117));
-            university.Students.Add(new Student("Timothy", "Benton", 20, 118));
-            university.Students.Add(new Student("Latifah", "Weiss", 18, 119));
-            university.Students.Add(new Student("Dana", "Mayer", 21, 120));
+            university.Students.Add(new Student("Holmes", "Haley", 19, 111));
+            university.Students.Add(new Student("Brittany", "Lang", 22, 112));
+            university.Students.Add(new Student("Timothy", "Calhoun", 21, 113));
+            university.Students.Add(new Student("Carlos", "Ashley", 18, 114));
+            university.Students.Add(new Student("Ivan", "Bean", 20, 115));
+            university.Students.Add(new Student("Jerry", "Quinn", 21, 116));
+            university.Students.Add(new Student("Wylie", "Benton", 31, 117));
+            university.Students.Add(new Student("Gemma", "Hobbs", 19, 118));
+            university.Students.Add(new Student("Timothy", "Benton", 20, 119));
+            university.Students.Add(new Student("Latifah", "Weiss", 18, 120));
+            university.Students.Add(new Student("Dana", "Mayer", 21, 121));
 
             //Professors
             //Instructor , Assistant Professor ,Associate Professor,Professor
