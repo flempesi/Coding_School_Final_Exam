@@ -95,30 +95,36 @@ namespace WindowsFormsApp1.Methods {
                 Course courseExist = courses.Find(x => x.Id == scheduleCourse.CourseID);
 
                 foreach (Schedule scheduleStudent in sceduleListOfStudent) {
-                    if (scheduleStudent.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
-                        int HoursExistingCourse = newUniversity.Courses.Find(x => x.Id == scheduleCourse.CourseID).Hours;
-                        int HoursNewCourse = newUniversity.Courses.Find(x => x.Id == courseId).Hours;
-
-                        if (courseExist != null) {
-                            MessageBox.Show("You can not add the same course in the same student in same date");
-                            return false;
-
-                        }
-                        if (coursePerDay > 3) {// EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
-                            MessageBox.Show("A student cannt attend more than 3 courses a day");
-                            return false;
-                        }
-                        coursePerDay++;
-                        if (!CheckbyHour(dateTime, scheduleStudent, HoursExistingCourse, HoursNewCourse)) {
-                            return false;
-                        }
-                    }
+                    return CheckTheSameDay(courseId, newUniversity, dateTime, ref coursePerDay, scheduleCourse, courseExist, scheduleStudent);
 
                 }
             }
             return true;
         }
-        private static bool CheckbyHour(DateTime dateTime, Schedule item, int HoursExistingCourse, int HoursNewCourse) {
+
+        private  bool CheckTheSameDay(Guid courseId, University newUniversity, DateTime dateTime, ref int coursePerDay, Schedule scheduleCourse, Course courseExist, Schedule scheduleStudent) {
+            if (scheduleStudent.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
+                int HoursExistingCourse = newUniversity.Courses.Find(x => x.Id == scheduleStudent.CourseID).Hours;
+                int HoursNewCourse = newUniversity.Courses.Find(x => x.Id == courseId).Hours;
+
+                if (courseExist != null) {
+                    MessageBox.Show("You can not add the same course in the same student in same date");
+                    return false;
+
+                }
+                if (coursePerDay > 3) {// EACH STUDENT CANNOT HAVE MORE THAN 3 COURSES PER DAY!
+                    MessageBox.Show("A student cannt attend more than 3 courses a day");
+                    return false;
+                }
+                coursePerDay++;
+                if (!CheckbyHour(dateTime, scheduleStudent, HoursExistingCourse, HoursNewCourse)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private  bool CheckbyHour(DateTime dateTime, Schedule item, int HoursExistingCourse, int HoursNewCourse) {
             if (item.DateTimeSchedule.Hour == dateTime.Hour) {
                 MessageBox.Show("You can not add the same student in the same time of the same date");
                 return false;
