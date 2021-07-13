@@ -20,14 +20,18 @@ namespace WindowsFormsApp1.Methods {
                 DataGridViewRow rowProfessor = dGVStudents.SelectedRows[0];
                 Guid courseID = Guid.Parse(rowCourse.Cells["id"].Value.ToString());
                 Guid studentID = Guid.Parse(rowProfessor.Cells["id"].Value.ToString());
-
+                 
                 Course course = newUniversity.Students.Find(x => x.Id == studentID).Courses.Find(x => x.Id == courseID);
                 if (course == null) {//if dont have already this lesson
+
                     if (CheckIfSameStudentInSameDateTimeHasCourse(courseID, studentID, newUniversity)) {
                         newUniversity.Students.Find(x => x.Id == studentID).Courses.Add(newUniversity.Courses.Find(x => x.Id == courseID));
 
                         _AddCourseToStudentDGVMethods.RefreshDataGridScheduleStudents(dGVScheduleStudents, newUniversity, DeleteButton_CellClick);
                     }
+                }
+                else {
+                    MessageBox.Show("The student have already this course!");
                 }
             }
         }
@@ -87,16 +91,15 @@ namespace WindowsFormsApp1.Methods {
                 sceduleListOfStudent = newUniversity.ScheduleList.FindAll(x => x.CourseID == course.Id);
             }
 
-            foreach (var scheduleCourse in sceduleListOfCourse) {
+            foreach (Schedule  scheduleCourse in sceduleListOfCourse) {
                 dateTime = scheduleCourse.DateTimeSchedule;
                 Course courseExist = courses.Find(x => x.Id == scheduleCourse.CourseID);
 
-                foreach (var scheduleStudent in sceduleListOfStudent) {
+                foreach (Schedule scheduleStudent in sceduleListOfStudent) {
                     if (scheduleStudent.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
-                        if (scheduleStudent.DateTimeSchedule.Hour == dateTime.Hour) {
-                            MessageBox.Show("You can not add in the same student in the same time of the same date  more than one courses");
-                            return false;
-                        }
+                        int HoursExistingCourse = newUniversity.Courses.Find(x => x.Id == scheduleCourse.CourseID).Hours;
+                        int HoursNewCourse = newUniversity.Courses.Find(x => x.Id == courseId).Hours;
+
                         if (courseExist != null) {
                             MessageBox.Show("You can not add the same course in the same student in same date");
                             return false;
@@ -107,8 +110,39 @@ namespace WindowsFormsApp1.Methods {
                             return false;
                         }
                         coursePerDay++;
+                        if (!CheckbyHour(dateTime, scheduleStudent, HoursExistingCourse, HoursNewCourse)) {
+                            return false;
+                        }
                     }
 
+                }
+            }
+            return true;
+        }
+        private static bool CheckbyHour(DateTime dateTime, Schedule item, int HoursExistingCourse, int HoursNewCourse) {
+            if (item.DateTimeSchedule.Hour == dateTime.Hour) {
+                MessageBox.Show("You can not add the same student in the same time of the same date");
+                return false;
+
+            }
+            else {//by hours check
+                  //not having already lesson in the time of the new schedule for course
+                  //looking in the existing hours of the existing scheduled course 
+                  //An exei hdh mauhma se kapoio allo ma8hma
+                for (int i = 1; i < HoursExistingCourse; i++) {
+                    if (item.DateTimeSchedule.Hour + i == dateTime.Hour) {
+                        MessageBox.Show("During of existing lesson , cant added new lesson!");
+                        return false;
+                    }
+                }
+                //not having  lesson in the time of the new schedule for course
+                //looking in the new hours of th new course to schedule
+                //An kata ths diarkeias toy neoy ma8hmatos exei allo ma8hma
+                for (int i = 1; i < HoursNewCourse; i++) {
+                    if (item.DateTimeSchedule.Hour == dateTime.Hour + i) {
+                        MessageBox.Show("During of the new scheduled course , student have already lesson!");
+                        return false;
+                    }
                 }
             }
             return true;
