@@ -27,6 +27,14 @@ namespace WindowsFormsApp1.Methods {
                     hasDeletedRecords = true;
                     newUniversity.ScheduleList.Remove(schedule);
                     newUniversity.Professors.Find(x => x.Id == schedule.ProfessorID).Courses.Remove(course);
+                    //remove too from student
+                    foreach (Student student in newUniversity.Students) {
+                        Course courseStudent=newUniversity.Students.Find(x=>x.Id==student.Id).Courses.Find(x=>x.Id== course.Id);
+                        if (courseStudent != null) {
+                            newUniversity.Students.Find(x => x.Id == student.Id).Courses.Remove(courseStudent);
+                        }
+                    }
+                   
                     _CourseSchedulerDVGMethods.RefreshDataGridSchedule(dGVSchedule, newUniversity, dataGridViewSchedules_DeleteButton_CellClick);
 
                     SaveChanges(newUniversity);
@@ -35,7 +43,7 @@ namespace WindowsFormsApp1.Methods {
         }
         public void SaveButtonActions(DataGridView dGVSchedule, Form form, bool hasDeletedRecords, University newUniversity) {
 
-            if (dGVSchedule.Rows.Count > 1) {
+            if (dGVSchedule.Rows.Count > 0) {
                 SaveChanges(newUniversity);
                 form.Close();
             }
