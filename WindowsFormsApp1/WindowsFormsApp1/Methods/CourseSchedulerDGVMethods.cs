@@ -21,6 +21,11 @@ namespace WindowsFormsApp1.Methods {
             form.MaximumSize = form.Size;
             form.MinimumSize = form.Size;
 
+            DateTime dateTime = DateTime.Now;
+            TimeSpan timeSpan = new TimeSpan(08, 00, 00);
+            dateTime = dateTime.Date + timeSpan;
+            ctrlTime.Value = dateTime;
+
             ctrlTime.ShowUpDown = true;
             LoadGridViewCourses(dGVCourses, newUniversity);
             LoadGridViewProfessors(dGVProfessors, newUniversity);
