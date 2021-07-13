@@ -10,6 +10,7 @@ namespace WindowsFormsApp1.Methods {
     class CommonDGVMethods {
 
         public void SetDataGridViewProperties(DataGridView dataGridView) {
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridView.MultiSelect = false;
             dataGridView.AllowUserToAddRows = false;
             dataGridView.AllowUserToResizeRows = false;

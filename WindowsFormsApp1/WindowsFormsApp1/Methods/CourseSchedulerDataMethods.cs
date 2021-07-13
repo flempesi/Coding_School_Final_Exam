@@ -13,17 +13,20 @@ namespace WindowsFormsApp1.Methods {
 
         private CourseSchedulerDGVMethods _CourseSchedulerDVGMethods = new CourseSchedulerDGVMethods();
         private Storage _Storage = new Storage();
+
+
         public void DeleteSchedule(DataGridView dGVSchedule, University newUniversity, bool hasDeletedRecords, Action<object, DataGridViewCellEventArgs> dataGridViewSchedules_DeleteButton_CellClick) {
             if (dGVSchedule.SelectedRows.Count == 1) {
                 int r = dGVSchedule.SelectedRows[0].Index;
                 DataGridViewRow rowSchedule = dGVSchedule.SelectedRows[0];
                 Guid scheduleID = Guid.Parse(rowSchedule.Cells["Id"].Value.ToString());
                 Schedule schedule = newUniversity.ScheduleList.Find(x => x.Id == scheduleID);
-
+                Course course = newUniversity.Professors.Find(x => x.Id == schedule.ProfessorID).Courses.Find(x => x.Id == schedule.CourseID);
                 DialogResult result = MessageBox.Show("Are you sure to delete this record ? ", "Delete record", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes) {
                     hasDeletedRecords = true;
                     newUniversity.ScheduleList.Remove(schedule);
+                    newUniversity.Professors.Find(x => x.Id == schedule.ProfessorID).Courses.Remove(course);
                     _CourseSchedulerDVGMethods.RefreshDataGridSchedule(dGVSchedule, newUniversity, dataGridViewSchedules_DeleteButton_CellClick);
 
                     SaveChanges(newUniversity);
@@ -60,7 +63,10 @@ namespace WindowsFormsApp1.Methods {
                     if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule, courseID, newUniversity) &&
                         CheckMaxCoursesForProfessor(professorID, dateTimeSchedule, newUniversity)) {
                         newUniversity.ScheduleList.Add(new Schedule(professorID, courseID, dateTimeSchedule));
+                        newUniversity.Professors.Find(x => x.Id == professorID).Courses.Add(newUniversity.Courses.Find(x => x.Id == courseID));
+
                         _CourseSchedulerDVGMethods.RefreshDataGridSchedule(dGVSchedule, newUniversity, dataGridViewSchedules_DeleteButton_CellClick);
+
                     }
                 }else {
                     MessageBox.Show("This course is already scheduled!");
