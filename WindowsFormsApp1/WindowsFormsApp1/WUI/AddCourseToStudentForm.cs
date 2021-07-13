@@ -47,7 +47,7 @@ namespace WindowsFormsApp1.WUI {
         }
 
         private void btnRefresh_Click(object sender, EventArgs e) {
-            _AddCourseToStudentDGVMethods.RefreshData(dGVStudents, dGVCoursesForStudents, NewUniversity);
+            _AddCourseToStudentDGVMethods.RefreshData(dGVStudents, dGVCoursesForStudents, dGVScheduleStudents, NewUniversity, dGVScheduleStudents_DeleteButton_CellClick);
 
         }
     }
