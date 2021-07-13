@@ -15,11 +15,9 @@ namespace WindowsFormsApp1.WUI {
     public partial class AddCourseToStudentForm : Form {
         public University NewUniversity = new University();
 
-        private List<Student> _StudentsList = new List<Student>();
-
         private AddCourseToStudentDGVMethods _AddCourseToStudentDGVMethods = new AddCourseToStudentDGVMethods();
         private AddCourseToStudentDataMethods _AddCourseToStudentDataMethods = new AddCourseToStudentDataMethods();
-        private Storage _Storage = new Storage();
+
         private bool HasDeletedRecords = false;
         public AddCourseToStudentForm() {
             InitializeComponent();
