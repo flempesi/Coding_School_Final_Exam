@@ -10,9 +10,8 @@ namespace WindowsFormsApp1.Impl {
         public Guid ProfessorID { get; set; }
         public Guid CourseID { get; set; }
         public DateTime DateTimeSchedule { get; set; }
-        //public List<Student> Students { get; set; }
 
-        public Schedule() :base(){
+        public Schedule() : base() {
 
         }
         public Schedule(Guid professorID, Guid courseID, DateTime dateTimeSchedule) : base() {
