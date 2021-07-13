@@ -55,11 +55,15 @@ namespace WindowsFormsApp1.Methods {
                 Guid courseID = Guid.Parse(rowCourse.Cells["Id"].Value.ToString());
                 Guid professorID = Guid.Parse(rowProfessor.Cells["Id"].Value.ToString());
                 DateTime dateTimeSchedule = GetDateTime(ctrlTime, ctrlDate);
-
-                if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule, courseID, newUniversity) &&
-                    CheckMaxCoursesForProfessor(professorID, dateTimeSchedule, newUniversity)) {
-                    newUniversity.ScheduleList.Add(new Schedule(professorID, courseID, dateTimeSchedule));
-                    _CourseSchedulerDVGMethods.RefreshDataGridSchedule(dGVSchedule, newUniversity, dataGridViewSchedules_DeleteButton_CellClick);
+                Schedule scheduledCourse = newUniversity.ScheduleList.Find(x => x.CourseID == courseID);
+                if (scheduledCourse == null) {
+                    if (CheckIfSameProfessorInSameDateTimeHasCourse(professorID, dateTimeSchedule, courseID, newUniversity) &&
+                        CheckMaxCoursesForProfessor(professorID, dateTimeSchedule, newUniversity)) {
+                        newUniversity.ScheduleList.Add(new Schedule(professorID, courseID, dateTimeSchedule));
+                        _CourseSchedulerDVGMethods.RefreshDataGridSchedule(dGVSchedule, newUniversity, dataGridViewSchedules_DeleteButton_CellClick);
+                    }
+                }else {
+                    MessageBox.Show("This course is already scheduled!");
                 }
             }
         }
@@ -149,6 +153,7 @@ namespace WindowsFormsApp1.Methods {
             }
             if (coursesPerWeek >= 20) {
                 MessageBox.Show("The professor cant teach more than 20 courses per week!");
+                return false;
             }
             return true;
         }
