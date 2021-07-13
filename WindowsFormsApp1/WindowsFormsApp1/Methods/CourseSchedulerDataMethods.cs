@@ -124,7 +124,7 @@ namespace WindowsFormsApp1.Methods {
                 //An kata ths diarkeias toy neoy ma8hmatos exei allo ma8hma
                 for (int i = 1; i < HoursNewCourse; i++) {
                     if (item.DateTimeSchedule.Hour == dateTime.Hour + i) {
-                        MessageBox.Show("In the during of the new scheduled course , professor have already lesson!");
+                        MessageBox.Show("During of the new scheduled course , professor have already lesson!");
                         return false;
                     }
                 }
