@@ -36,7 +36,7 @@ namespace WindowsFormsApp1.Methods {
             }
         }
         public void DeleteCourse(DataGridView dGVScheduleStudents,University newUniversity,bool hasDeletedRecords, Action<object, DataGridViewCellEventArgs> DeleteButton_CellClick) {
-            //
+            
             if (dGVScheduleStudents.SelectedRows.Count == 1) {
                 DataGridViewRow rowSchedule = dGVScheduleStudents.SelectedRows[0];
                 Guid courseID = Guid.Parse(rowSchedule.Cells["CourseId"].Value.ToString());
@@ -77,8 +77,7 @@ namespace WindowsFormsApp1.Methods {
         }
 
         public bool CheckIfSameStudentInSameDateTimeHasCourse(Guid courseId, Guid studentId,University newUniversity) {
-            //    CANNOT ADD SAME STUDENT   IN SAME DATE & HOUR
-
+            //CANNOT ADD SAME STUDENT   IN SAME DATE & HOUR
             //cannot add same course in same date
             List<Schedule> sceduleListOfCourse = new List<Schedule>();
             List<Schedule> sceduleListOfStudent = new List<Schedule>();
