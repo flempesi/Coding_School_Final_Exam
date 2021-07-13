@@ -42,11 +42,12 @@ namespace WindowsFormsApp1.Methods {
         #endregion
 
         #region refresh
-        public void RefreshData(DataGridView dGVStudents, DataGridView dGVCoursesForStudents, University newUniversity) {
+        public void RefreshData(DataGridView dGVStudents, DataGridView dGVCoursesForStudents, DataGridView dGVScheduleStudents, University newUniversity, Action<object, DataGridViewCellEventArgs> DeleteButton_CellClick) {
             dGVCoursesForStudents.Rows.Clear();
             LoadGridViewCourses(dGVCoursesForStudents, newUniversity);
             dGVStudents.Rows.Clear();
             LoadGridViewStudents(dGVStudents, newUniversity);
+            RefreshDataGridScheduleStudents( dGVScheduleStudents,  newUniversity, DeleteButton_CellClick);
 
         }
         public void RefreshDataGridScheduleStudents(DataGridView dGVScheduleStudents, University newUniversity, Action<object, DataGridViewCellEventArgs> DeleteButton_CellClick) {
