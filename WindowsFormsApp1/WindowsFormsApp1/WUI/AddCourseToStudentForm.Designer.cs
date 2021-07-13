@@ -57,7 +57,7 @@ namespace WindowsFormsApp1.WUI {
             this.dGVCoursesForStudents.Name = "dGVCoursesForStudents";
             this.dGVCoursesForStudents.RowHeadersWidth = 51;
             this.dGVCoursesForStudents.RowTemplate.Height = 24;
-            this.dGVCoursesForStudents.Size = new System.Drawing.Size(612, 150);
+            this.dGVCoursesForStudents.Size = new System.Drawing.Size(803, 150);
             this.dGVCoursesForStudents.TabIndex = 26;
             // 
             // dGVStudents
@@ -75,7 +75,7 @@ namespace WindowsFormsApp1.WUI {
             this.dGVStudents.Name = "dGVStudents";
             this.dGVStudents.RowHeadersWidth = 51;
             this.dGVStudents.RowTemplate.Height = 24;
-            this.dGVStudents.Size = new System.Drawing.Size(612, 150);
+            this.dGVStudents.Size = new System.Drawing.Size(803, 150);
             this.dGVStudents.TabIndex = 28;
             // 
             // label2
@@ -93,9 +93,9 @@ namespace WindowsFormsApp1.WUI {
             this.btnAdd.BackColor = System.Drawing.Color.SteelBlue;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(747, 216);
+            this.btnAdd.Location = new System.Drawing.Point(846, 200);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(260, 52);
+            this.btnAdd.Size = new System.Drawing.Size(204, 52);
             this.btnAdd.TabIndex = 30;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = false;
