@@ -12,34 +12,76 @@ namespace WindowsFormsApp1.Methods {
             //Courses
             // Physics,Mathematics,Chemistry,Financial,IT
 
-            university.Courses.Add(new Course("010", "Math I", 2, CoursesCategoryEnum.Mathematics));
-            university.Courses.Add(new Course("011", "Math II", 4, CoursesCategoryEnum.Mathematics));
-            university.Courses.Add(new Course("012", "Math III", 2, CoursesCategoryEnum.Mathematics));
-            university.Courses.Add(new Course("013", "Algebra", 3, CoursesCategoryEnum.Mathematics));
-            university.Courses.Add(new Course("014", "Geometry", 2, CoursesCategoryEnum.Mathematics));
+            university.Courses.Add(new Course("010T", "Math I", 2, CoursesCategoryEnum.Mathematics));
+            university.Courses.Add(new Course("010L", "Math I LAB", 1, CoursesCategoryEnum.Mathematics));
 
-            university.Courses.Add(new Course("020", "Physics II", 3, CoursesCategoryEnum.Physics));
-            university.Courses.Add(new Course("021", "Physics III", 3, CoursesCategoryEnum.Physics));
-            university.Courses.Add(new Course("022", "Quantum mechanics", 3, CoursesCategoryEnum.Physics));
+            university.Courses.Add(new Course("011T", "Math II", 3, CoursesCategoryEnum.Mathematics));
+            university.Courses.Add(new Course("011L", "Math II LAB", 1, CoursesCategoryEnum.Mathematics));
 
-            university.Courses.Add(new Course("031", "organic", 2, CoursesCategoryEnum.Chemistry));
-            university.Courses.Add(new Course("032", "inorganic", 3, CoursesCategoryEnum.Chemistry));
-            university.Courses.Add(new Course("033", "analytical", 2, CoursesCategoryEnum.Chemistry));
-            university.Courses.Add(new Course("034", "Algebra", 4, CoursesCategoryEnum.Chemistry));
-            university.Courses.Add(new Course("035", "biochemistry", 2, CoursesCategoryEnum.Chemistry));
+            university.Courses.Add(new Course("013T", "Algebra", 3, CoursesCategoryEnum.Mathematics));
+            university.Courses.Add(new Course("013L", "Algebra LAB", 1, CoursesCategoryEnum.Mathematics));
+
+            university.Courses.Add(new Course("014T", "Geometry", 2, CoursesCategoryEnum.Mathematics));
+            university.Courses.Add(new Course("014L", "Geometry LAB", 1, CoursesCategoryEnum.Mathematics));
+
+            university.Courses.Add(new Course("020T", "Physics II", 3, CoursesCategoryEnum.Physics));
+            university.Courses.Add(new Course("020L", "Physics II LAB", 1, CoursesCategoryEnum.Physics));
+
+            university.Courses.Add(new Course("021T", "Physics III", 3, CoursesCategoryEnum.Physics));
+            university.Courses.Add(new Course("021L", "Physics III LAB", 1, CoursesCategoryEnum.Physics));
+
+            university.Courses.Add(new Course("022T", "Quantum mechanics", 2, CoursesCategoryEnum.Physics));
+            university.Courses.Add(new Course("022L", "Quantum mechanics LAB", 1, CoursesCategoryEnum.Physics));
+
+            university.Courses.Add(new Course("031T", "Organic", 2, CoursesCategoryEnum.Chemistry));
+            university.Courses.Add(new Course("031L", "Organic LAB", 1, CoursesCategoryEnum.Chemistry));
+
+            university.Courses.Add(new Course("032T", "Inorganic", 2, CoursesCategoryEnum.Chemistry));
+            university.Courses.Add(new Course("032L", "Inorganic LAB", 1, CoursesCategoryEnum.Chemistry));
+
+            university.Courses.Add(new Course("033T", "Analytical", 2, CoursesCategoryEnum.Chemistry));
+            university.Courses.Add(new Course("033L", "Analytical LAB", 1, CoursesCategoryEnum.Chemistry));
+
+            university.Courses.Add(new Course("034T", "Algebra", 2, CoursesCategoryEnum.Chemistry));
+            university.Courses.Add(new Course("034L", "Algebra LAB", 1, CoursesCategoryEnum.Chemistry));
+
+            university.Courses.Add(new Course("035T", "Biochemistry", 2, CoursesCategoryEnum.Chemistry));
+            university.Courses.Add(new Course("035L", "Biochemistry LAB", 1, CoursesCategoryEnum.Chemistry));
 
 
-            university.Courses.Add(new Course("041", "Accounting", 3, CoursesCategoryEnum.Financial));
-            university.Courses.Add(new Course("042", "Financial mathematics", 1, CoursesCategoryEnum.Financial));
-            university.Courses.Add(new Course("043", "Financial management", 4, CoursesCategoryEnum.Chemistry));
-            university.Courses.Add(new Course("044", "Algebra", 2, CoursesCategoryEnum.Chemistry));
-            university.Courses.Add(new Course("045", "biochemistry", 2, CoursesCategoryEnum.Chemistry));
 
-            university.Courses.Add(new Course("051", "C Shapr progr", 3, CoursesCategoryEnum.IT));
-            university.Courses.Add(new Course("052", "Java progr", 3, CoursesCategoryEnum.IT));
-            university.Courses.Add(new Course("053", "Php progr", 4, CoursesCategoryEnum.IT));
-            university.Courses.Add(new Course("054", "WWW", 3, CoursesCategoryEnum.IT));
-            university.Courses.Add(new Course("055", "Software engineering", 2, CoursesCategoryEnum.IT));
+            university.Courses.Add(new Course("041T", "Accounting", 3, CoursesCategoryEnum.Financial));
+            university.Courses.Add(new Course("041L", "Accounting LAB", 1, CoursesCategoryEnum.Financial));
+
+            university.Courses.Add(new Course("042T", "Financial mathematics ", 1, CoursesCategoryEnum.Financial));
+            university.Courses.Add(new Course("042L", "Financial mathematics LAB", 1, CoursesCategoryEnum.Financial));
+
+            university.Courses.Add(new Course("043T", "Financial management", 2, CoursesCategoryEnum.Chemistry));
+            university.Courses.Add(new Course("043L", "Financial management LAB", 1, CoursesCategoryEnum.Chemistry));
+
+            university.Courses.Add(new Course("044T", "Agricultural", 2, CoursesCategoryEnum.Chemistry));
+            university.Courses.Add(new Course("044L", "Agricultural LAB", 1, CoursesCategoryEnum.Chemistry));
+
+            university.Courses.Add(new Course("045T", "Biochemistry", 2, CoursesCategoryEnum.Chemistry));
+            university.Courses.Add(new Course("045L", "Biochemistry LAB", 1, CoursesCategoryEnum.Chemistry));
+
+
+            university.Courses.Add(new Course("051T", "C Shapr progr", 3, CoursesCategoryEnum.IT));
+            university.Courses.Add(new Course("051L", "C Shapr progr LAB", 1, CoursesCategoryEnum.IT));
+
+            university.Courses.Add(new Course("052T", "Java progr", 2, CoursesCategoryEnum.IT));
+            university.Courses.Add(new Course("052L", "Java progr LAB", 1, CoursesCategoryEnum.IT));
+
+            university.Courses.Add(new Course("053T", "Php progr", 2, CoursesCategoryEnum.IT));
+            university.Courses.Add(new Course("053L", "Php progr LAB", 1, CoursesCategoryEnum.IT));
+
+            university.Courses.Add(new Course("054T", "WWW", 3, CoursesCategoryEnum.IT));
+            university.Courses.Add(new Course("054L", "WWW LAB", 1, CoursesCategoryEnum.IT));
+
+            university.Courses.Add(new Course("055T", "Software engineering", 2, CoursesCategoryEnum.IT));
+            university.Courses.Add(new Course("055L", "Software engineering LAB", 1, CoursesCategoryEnum.IT));
+
+
 
 
             //Students
