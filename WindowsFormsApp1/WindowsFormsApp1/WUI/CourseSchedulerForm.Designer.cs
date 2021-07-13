@@ -64,7 +64,7 @@ namespace WindowsFormsApp1.WUI {
             // 
             // ctrlTime
             // 
-            this.ctrlTime.CustomFormat = "HH:mm";
+            this.ctrlTime.CustomFormat = "HH:00";
             this.ctrlTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.ctrlTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.ctrlTime.Location = new System.Drawing.Point(685, 246);

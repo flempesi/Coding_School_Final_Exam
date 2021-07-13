@@ -103,7 +103,7 @@ namespace WindowsFormsApp1.Methods {
         }
 
         private  bool CheckTheSameDay(Guid courseId, University newUniversity, DateTime dateTime, ref int coursePerDay, Schedule scheduleCourse, Course courseExist, Schedule scheduleStudent) {
-            if (scheduleStudent.DateTimeSchedule.Date.ToString("yyyyMMdd") == dateTime.Date.ToString("yyyyMMdd")) {
+            if (scheduleStudent.DateTimeSchedule.Date.ToUniversalTime().ToLocalTime().ToString("yyyyMMdd") == dateTime.Date.ToUniversalTime().ToLocalTime().ToString("yyyyMMdd")) {
                 int HoursExistingCourse = newUniversity.Courses.Find(x => x.Id == scheduleStudent.CourseID).Hours;
                 int HoursNewCourse = newUniversity.Courses.Find(x => x.Id == courseId).Hours;
 
@@ -125,7 +125,7 @@ namespace WindowsFormsApp1.Methods {
         }
 
         private  bool CheckbyHour(DateTime dateTime, Schedule item, int HoursExistingCourse, int HoursNewCourse) {
-            if (item.DateTimeSchedule.Hour == dateTime.Hour) {
+            if (item.DateTimeSchedule.ToUniversalTime().ToLocalTime().Hour == dateTime.ToUniversalTime().ToLocalTime().Hour) {
                 MessageBox.Show("You can not add the same student in the same time of the same date");
                 return false;
 
@@ -135,7 +135,7 @@ namespace WindowsFormsApp1.Methods {
                   //looking in the existing hours of the existing scheduled course 
                   //An exei hdh mauhma se kapoio allo ma8hma
                 for (int i = 1; i < HoursExistingCourse; i++) {
-                    if (item.DateTimeSchedule.Hour + i == dateTime.Hour) {
+                    if (item.DateTimeSchedule.ToUniversalTime().ToLocalTime().Hour + i == dateTime.ToUniversalTime().ToLocalTime().Hour) {
                         MessageBox.Show("During of existing lesson , cant added new lesson!");
                         return false;
                     }
@@ -144,7 +144,7 @@ namespace WindowsFormsApp1.Methods {
                 //looking in the new hours of th new course to schedule
                 //An kata ths diarkeias toy neoy ma8hmatos exei allo ma8hma
                 for (int i = 1; i < HoursNewCourse; i++) {
-                    if (item.DateTimeSchedule.Hour == dateTime.Hour + i) {
+                    if (item.DateTimeSchedule.ToUniversalTime().ToLocalTime().Hour == dateTime.ToUniversalTime().ToLocalTime().Hour + i) {
                         MessageBox.Show("During of the new scheduled course , student have already lesson!");
                         return false;
                     }

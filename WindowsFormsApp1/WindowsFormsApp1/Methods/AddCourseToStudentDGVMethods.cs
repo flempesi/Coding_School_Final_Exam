@@ -89,7 +89,8 @@ namespace WindowsFormsApp1.Methods {
                         Guid professorId = newUniversity.ScheduleList.Find(x => x.CourseID == course.Id).ProfessorID;
                         string name = newUniversity.Professors.Find(x => x.Id == professorId).Name;
                         string surname = newUniversity.Professors.Find(x => x.Id == professorId).Surname;
-                        string datetime = schedule.DateTimeSchedule.ToString();
+                        string datetime = (schedule.DateTimeSchedule.ToUniversalTime().ToLocalTime()).ToString();
+                            //schedule.DateTimeSchedule.ToString();
 
                         row = (new string[] { "", courseSubject, name, surname, datetime, studentName, studentSurname, studentId, courseId });
                         dGVScheduleStudents.Rows.Add(row);
@@ -106,7 +107,7 @@ namespace WindowsFormsApp1.Methods {
             foreach (var course in Courses) {
                 Schedule courseScheduled = newUniversity.ScheduleList.Find(x => x.CourseID == course.Id);
                 if (courseScheduled != null) {
-                    row = (new string[] { course.Id.ToString(), course.Code, course.Subject, course.Hours.ToString(), course.Category.ToString(), courseScheduled.DateTimeSchedule.ToString(), newUniversity.Professors.Find(x => x.Id == courseScheduled.ProfessorID).Name, newUniversity.Professors.Find(x => x.Id == courseScheduled.ProfessorID).Surname });
+                    row = (new string[] { course.Id.ToString(), course.Code, course.Subject, course.Hours.ToString(), course.Category.ToString(), (courseScheduled.DateTimeSchedule.ToUniversalTime().ToLocalTime()).ToString(), newUniversity.Professors.Find(x => x.Id == courseScheduled.ProfessorID).Name, newUniversity.Professors.Find(x => x.Id == courseScheduled.ProfessorID).Surname });
                     dataGridView.Rows.Add(row);
                 }
             }

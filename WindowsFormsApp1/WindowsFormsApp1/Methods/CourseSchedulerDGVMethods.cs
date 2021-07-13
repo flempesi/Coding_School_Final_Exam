@@ -77,7 +77,9 @@ namespace WindowsFormsApp1.Methods {
                     string name = newUniversity.Professors.Find(x => x.Id == item.ProfessorID).Name;
                     string surname = newUniversity.Professors.Find(x => x.Id == item.ProfessorID).Surname;
                     string CourseSubject = newUniversity.Courses.Find(x => x.Id == item.CourseID).Subject;
-                    string datetime = item.DateTimeSchedule.ToString();
+                    string datetime = (item.DateTimeSchedule.ToUniversalTime().ToLocalTime()).ToString();
+                        //TimeZone.CurrentTimeZone.ToLocalTime(item.DateTimeSchedule).ToString();
+                        //(DateTime.Parse(item.DateTimeSchedule.ToString())).ToString();
                     row = (new string[] { "", ScheduleId, CourseSubject, name, surname, datetime });
                     dGVSchedule.Rows.Add(row);
                 }
