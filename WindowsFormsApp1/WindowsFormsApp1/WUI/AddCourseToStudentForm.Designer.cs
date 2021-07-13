@@ -25,6 +25,7 @@ namespace WindowsFormsApp1.WUI {
         /// </summary>
         private void InitializeComponent() {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddCourseToStudentForm));
             this.label1 = new System.Windows.Forms.Label();
             this.dGVCoursesForStudents = new System.Windows.Forms.DataGridView();
             this.dGVStudents = new System.Windows.Forms.DataGridView();
@@ -176,6 +177,7 @@ namespace WindowsFormsApp1.WUI {
             this.Controls.Add(this.dGVStudents);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dGVCoursesForStudents);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddCourseToStudentForm";
             this.Text = "Add Course To Student ";
             this.Load += new System.EventHandler(this.AddCourseToStudentForm_Load);

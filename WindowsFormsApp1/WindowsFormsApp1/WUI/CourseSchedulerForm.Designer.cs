@@ -24,6 +24,7 @@ namespace WindowsFormsApp1.WUI {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CourseSchedulerForm));
             this.dGVCourses = new System.Windows.Forms.DataGridView();
             this.ctrlDate = new System.Windows.Forms.DateTimePicker();
             this.ctrlTime = new System.Windows.Forms.DateTimePicker();
@@ -201,6 +202,7 @@ namespace WindowsFormsApp1.WUI {
             this.Controls.Add(this.ctrlTime);
             this.Controls.Add(this.ctrlDate);
             this.Controls.Add(this.dGVCourses);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CourseSchedulerForm";
             this.Text = "Course Scheduler ";
             this.Load += new System.EventHandler(this.CourseSchedulerForm_Load);
